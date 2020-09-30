@@ -1,0 +1,345 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  /* header */
+  .headerContainer {
+    width: 100%;
+    height: 95px;
+    display: grid;
+    grid-template-columns: 50px 1fr 50px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .labelMovil {
+    grid-column: 3;
+    margin-left: 15%;
+    margin-top: -35%;
+    z-index: 1;
+  }
+
+  .headerFigure {
+    width: 48.8px;
+    height: 48.8px;
+    margin-left: 22px;
+  }
+
+  .headerFigure img {
+    max-width: 100%;
+    z-index: 1;
+  }
+  /* nav */
+  .botoneraMovil {
+    position: absolute;
+    width: 100%;
+    height: 0;
+    background: #6742e7;
+    top: 95px;
+    opacity: 0.9;
+  }
+
+  .botoneraMovil ul {
+    margin-top: 17px;
+  }
+
+  .botoneraMovil ul li {
+    visibility: hidden;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+  }
+
+  .botoneraMovil ul li a {
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    line-height: 60px;
+  }
+
+  .labelMovil span {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50px;
+    background: url(../img/bars_e.png) no-repeat;
+    cursor: pointer;
+  }
+
+  .botonMovil {
+    display: none;
+  }
+
+  .botonMovil:checked + .labelMovil span {
+    border-radius: 50px;
+    background: url(../img/cerrar_e.png) no-repeat;
+    width: 24px;
+    height: 24px;
+    margin-left: 10px;
+  }
+
+  .botonMovil:checked ~ .botoneraMovil.botoneraMovil ul li {
+    visibility: visible;
+  }
+
+  .botonMovil:checked ~ .botoneraMovil.botoneraMovil {
+    height: 100vh;
+    z-index: 1;
+  }
+  /* section buscador */
+  .sectionBuscador {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 45px;
+  }
+
+  .sectionBuscador figure {
+    width: 273px;
+    height: 130px;
+  }
+  .sectionBuscador figure img {
+    max-width: 100%;
+  }
+  .sectionBuscador h1 {
+    width: 286px;
+    height: 99px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 25px;
+    color: #572ee5;
+    text-align: center;
+    line-height: 33px;
+    margin-bottom: 31px;
+  }
+  .sectionBuscador input {
+    width: 334px;
+    height: 50px;
+    background: #ffffff;
+    border: 1px solid #572ee5;
+    border-radius: 27px;
+    border-radius: 27px;
+    text-align: center;
+    margin-bottom: 31px;
+    outline: none;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    color: #000000;
+    text-align: center;
+  }
+  .sectionBuscador span {
+    position: absolute;
+    margin-left: -5%;
+    margin-top: 2%;
+  }
+
+  .trending {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #572ee5;
+    text-align: center;
+    line-height: 25px;
+  }
+
+  .reactions {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #572ee5;
+    text-align: center;
+    line-height: 25px;
+  }
+  .iconClose {
+    display: none;
+  }
+  .iconClose:hover {
+    cursor: pointer;
+  }
+
+  .resultsGifos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: none;
+  }
+
+  .resultsGifos hr {
+    margin: 0 auto;
+    margin-top: 35px;
+    margin-bottom: 43px;
+    width: 157px;
+    opacity: 0.5;
+    border: 1px solid #9cafc3;
+  }
+
+  .resultsGifos h2 {
+    margin: 0 auto;
+    margin-bottom: 38px;
+    text-align: center;
+    text-transform: capitalize;
+    font-family: 'Montserrat';
+    font-size: 25px;
+    font-weight: bold;
+    color: #572ee5;
+    text-align: center;
+    line-height: 40px;
+  }
+
+  .contentResultsGifos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contentResultsGifos img {
+    width: 156px;
+    height: 120px;
+    margin: 21px 21px;
+  }
+  .ulContentSearch {
+    z-index: 1;
+    position: absolute;
+    width: 290px;
+    margin-top: -30px;
+    text-align: left;
+    background-color: #fff;
+    margin-left: 24px;
+  }
+  .ulContentSearch li {
+    line-height: 30px;
+    margin-left: 10px;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    color: #000000;
+    letter-spacing: 0;
+    border: none;
+  }
+  .ulContentSearch li:hover {
+    cursor: pointer;
+  }
+
+  /* secction gifos */
+  .trendingGifos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f5f9;
+  }
+  .trendingGifos h2 {
+    margin-top: 46px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    color: #572ee5;
+    text-align: center;
+    line-height: 30px;
+    margin-bottom: 7px;
+  }
+  .trendingGifos p {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    color: #000000;
+    text-align: center;
+    line-height: 23px;
+  }
+  .pGifos {
+    margin-bottom: 32px;
+  }
+  .containerImgGifos {
+    margin: 0 auto;
+    display: flex;
+    overflow: auto;
+    background-color: #f4f5f9;
+  }
+
+  .containerImgGifos::-webkit-scrollbar {
+    width: 1px;
+    background-color: #f5f5f5;
+  }
+
+  .containerImgGifos figure {
+    width: 243px;
+    height: 187px;
+    border: none;
+    margin: 0 22px;
+    margin-bottom: 82px;
+  }
+  .containerImgGifos figure img {
+    width: 243px;
+    height: 187px;
+  }
+
+  .loaderGifos {
+    background-image: url(../img/Spin-1s-200px.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  /* footer */
+  .containerFooter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 196px;
+  }
+  .containerIconsRedes {
+    margin-top: 22px;
+    margin-bottom: 46px;
+  }
+  .containerIconsRedes img {
+    margin: 0 19px;
+  }
+  .containerFooter p {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    color: #000000;
+    letter-spacing: 0;
+  }
+}
+
+@media (max-width: 425px) {
+  .sectionBuscador span {
+    margin-left: -10%;
+    margin-top: 4%;
+  }
+}
+
+@media (max-width: 375px) {
+  .contentResultsGifos img {
+    margin: 10px 10px;
+  }
+}
+
+@media (max-width: 320px) {
+  .sectionBuscador input {
+    max-width: 280px;
+  }
+  .sectionBuscador span {
+    margin-left: -12%;
+  }
+  .contentResultsGifos img {
+    width: 140px;
+    margin: 5px 5px;
+  }
+}

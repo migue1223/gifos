@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <title>Gifos</title>
+  </head>
+  <body>
+    <header class="headerContainer">
+      <figure class="headerFigure">
+        <img src="assets/img/logo-mobile.svg" alt="Logo" />
+      </figure>
+      <input type="checkbox" id="botonMovil" class="botonMovil" />
+      <label for="botonMovil" class="labelMovil"><span></span></label>
+      <nav class="botoneraMovil">
+        <ul>
+          <li><a href="#episodios">Modo Nocturno</a></li>
+          <li><a href="#nosotros">Favoritos</a></li>
+          <li><a href="#entrevistas">Mis GIFOS</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section class="sectionBuscador">
+      <h1 class="titleBuscador">
+        Inspírate, busca, guarda, y crea los mejores GIFOS
+      </h1>
+      <figure class="imageBuscador">
+        <img src="assets/img/ilustra_header.svg" alt="Ilustra" />
+      </figure>
+      <div>
+        <input id="inputSearch" type="text" placeholder="Busca GIFOS y más" />
+        <span
+          ><img
+            class="iconSearch"
+            src="assets/img/icon-search.svg"
+            alt="Search" /><img
+            class="iconClose"
+            src="assets/img/close.svg"
+            alt="Search"
+        /></span>
+      </div>
+      <p class="trending">Trending:</p>
+      <p class="reactions">Reactions, Entertainment,</p>
+      <p class="reactions">Sports, Stickers, Artists</p>
+      <div class="resultsGifos" id="resultsGifos">
+        <hr />
+        <h2 id="titleCategorySearch"></h2>
+        <div class="contentResultsGifos"></div>
+      </div>
+    </section>
+    <section class="trendingGifos">
+      <h2>Trending GIFOS</h2>
+      <p>Mira los últimos</p>
+      <p class="pGifos">GIFOS de nuestra comunidad.</p>
+    </section>
+    <section class="containerImgGifos"></section>
+    <footer class="containerFooter">
+      <p>Compartir en:</p>
+      <div class="containerIconsRedes">
+        <img src="assets/img/icon_facebook.svg" alt="Facebook" />
+        <img src="assets/img/icon-twitter.svg" alt="Twitter" />
+        <img src="assets/img/icon_instagram.svg" alt="Facebook" />
+      </div>
+      <p>@ GIFOS 2020 All Rights Reserved.</p>
+    </footer>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
