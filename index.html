@@ -13,6 +13,36 @@
     <title>Gifos</title>
   </head>
   <body>
+    <div id="openModal" class="modalDialog">
+      <div id="containerOpenModal">
+        <a href="#close" title="Close" class="closeModal close"
+          ><img src="assets/img/close.svg" alt="Close Modal"
+        /></a>
+        <img
+          class="buttonSliderLeft"
+          src="assets/img/button-slider-left.svg"
+          alt="Button Left"
+        />
+        <img
+          class="buttonSliderRight"
+          src="assets/img/Button-Slider-right.svg"
+          alt="Button Rights"
+        />
+        <figure>
+          <img />
+          <div class="container-actions-modal">
+            <div>
+              <h2 class="h2-actions-modal"></h2>
+              <h3 class="h3-actions-modal"></h3>
+            </div>
+            <span>
+             
+            </span>
+          </div>
+        </figure>
+      </div>
+    </div>
+
     <header class="headerContainer">
       <figure class="headerFigure">
         <img src="assets/img/logo-mobile.svg" alt="Logo" />
@@ -24,52 +54,89 @@
           <li><a href="#episodios">Modo Nocturno</a></li>
           <li><a href="#nosotros">Favoritos</a></li>
           <li><a href="#entrevistas">Mis GIFOS</a></li>
+          <img
+            class="crearGifos"
+            id="crearGifos"
+            src="assets/img/button-crear-gifo.svg"
+            alt="Crear gifos"
+          />
         </ul>
       </nav>
     </header>
+
     <section class="sectionBuscador">
       <h1 class="titleBuscador">
-        Inspírate, busca, guarda, y crea los mejores GIFOS
+        Inspírate, busca, guarda, y crea <br />
+        los mejores <s>GIFOS</s>
       </h1>
       <figure class="imageBuscador">
         <img src="assets/img/ilustra_header.svg" alt="Ilustra" />
       </figure>
       <div>
-        <input id="inputSearch" type="text" placeholder="Busca GIFOS y más" />
-        <span
-          ><img
-            class="iconSearch"
-            src="assets/img/icon-search.svg"
-            alt="Search" /><img
-            class="iconClose"
-            src="assets/img/close.svg"
-            alt="Search"
-        /></span>
+          <input
+            id="inputSearch"
+            type="text"
+            placeholder="Busca GIFOS y más"
+            autocomplete="off"
+          />
+          <span
+            ><img
+              class="iconSearch"
+              src="assets/img/icon-search.svg"
+              alt="Search" /><img
+              class="iconClose"
+              src="assets/img/close.svg"
+              alt="Close"
+          /></span>
       </div>
       <p class="trending">Trending:</p>
-      <p class="reactions">Reactions, Entertainment,</p>
-      <p class="reactions">Sports, Stickers, Artists</p>
+      <div class="containerTrendingP">
+        <p class="reactions">Reactions, Entertainment,</p>
+        <p class="reactions">Sports, Stickers, Artists</p>
+      </div>
       <div class="resultsGifos" id="resultsGifos">
         <hr />
         <h2 id="titleCategorySearch"></h2>
         <div class="contentResultsGifos"></div>
       </div>
+      <button class="verMasGifos" offset="0" id="verMasGifs">VER MAS...</button>
     </section>
+
     <section class="trendingGifos">
       <h2>Trending GIFOS</h2>
-      <p>Mira los últimos</p>
-      <p class="pGifos">GIFOS de nuestra comunidad.</p>
-    </section>
-    <section class="containerImgGifos"></section>
-    <footer class="containerFooter">
-      <p>Compartir en:</p>
-      <div class="containerIconsRedes">
-        <img src="assets/img/icon_facebook.svg" alt="Facebook" />
-        <img src="assets/img/icon-twitter.svg" alt="Twitter" />
-        <img src="assets/img/icon_instagram.svg" alt="Facebook" />
+      <div>
+        <p>Mira los últimos</p>
+        <p class="pGifos">GIFOS de nuestra comunidad.</p>
       </div>
-      <p>@ GIFOS 2020 All Rights Reserved.</p>
+    </section>
+
+    <section class="containerImgGifos">
+      <img
+        class="buttonSliderLeft"
+        src="assets/img/button-slider-left.svg"
+        alt="Button Left"
+      />
+      <img
+        class="buttonSliderRight"
+        src="assets/img/Button-Slider-right.svg"
+        alt="Button Rights"
+      />
+    </section>
+
+    <footer class="containerFooter">
+      <div class="containerIconsRedes">
+        <p>Compartir en:</p>
+        <div>
+          <img src="assets/img/icon_facebook.svg" alt="Facebook" />
+          <img src="assets/img/icon-twitter.svg" alt="Twitter" />
+          <img src="assets/img/icon_instagram.svg" alt="Facebook" />
+        </div>
+      </div>
+      <p class="footerGifosAll">@ GIFOS 2020 All Rights Reserved.</p>
     </footer>
-    <script src="assets/js/main.js"></script>
+
+    <script type="module" src="api/index.js"></script>
+    <script type="module" src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/funcionesGenerales.js"></script>
   </body>
 </html>
