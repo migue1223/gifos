@@ -1,9 +1,11 @@
 "use strict";
 
+import API_KEY from '../config/index.js';
+
 class apiGipgy {
   constructor() {
     // endpoints apiGipgy
-    this.API_KEY = "u1D9iripUKO0Kpv6uxr8vxuPwAs0z2J4";
+    this.API_KEY = API_KEY.API_KEY;
     this.API_URL_SEARCH = "https://api.giphy.com/v1/gifs/search?";
     this.API_URL_TRENDING = "https://api.giphy.com/v1/gifs/trending?";
     this.API_URL_TAGS = "https://api.giphy.com/v1/gifs/search/tags?";
