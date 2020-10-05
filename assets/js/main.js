@@ -1,10 +1,7 @@
 "use strict";
 
 import apiGiphy from "../../api/index.js";
-import {
-  renderSpanIconsImages,
-  renderSpanIconFavorite,
-} from "./funcionesGenerales.js";
+import { renderSpanIconFavorite, renderGifo } from "./funcionesGenerales.js";
 
 console.log(apiGiphy);
 
@@ -21,7 +18,10 @@ const iconClose = document.querySelector(".iconClose");
 const titleCategorySearch = document.getElementById("titleCategorySearch");
 const seeMoreButton = document.getElementById("verMasGifs");
 const modalGifos = document.getElementById("openModal");
+const containerModal = document.getElementById("containerOpenModal")
 const closeModal = document.querySelector(".closeModal");
+const buttonSliderLeft = document.querySelectorAll(".buttonSliderLeft");
+const buttonSliderRight = document.querySelectorAll(".buttonSliderRight");
 
 // click input search & iconClose
 inputSearch.addEventListener("click", hideTitleImageSearch);
@@ -57,7 +57,7 @@ seeMoreButton.addEventListener("click", async () => {
   try {
     const results = await apiGiphy.getSeeMoreGifos(keywords, updateValueOffset);
     const res = await results.json();
-    res.data.forEach(renderGifsResultsClickSearch);
+    renderGifo(res.data, containerSearchResultsGifos);
   } catch (error) {
     console.error(error);
   }
@@ -65,6 +65,13 @@ seeMoreButton.addEventListener("click", async () => {
 
 // click cerrar modal
 closeModal.addEventListener("click", () => {
+  const imgs = containerModal.querySelectorAll("figure");
+  if (imgs.length > 0) {
+    imgs.forEach((element) => {
+      element.parentNode.removeChild(element);
+    });
+  }
+
   modalGifos.style.display = "none";
   const listContainerSlider = containerGifos.querySelectorAll(
     "figure span .validate-favorite"
@@ -72,6 +79,7 @@ closeModal.addEventListener("click", () => {
   const listContainerSearch = containerSearchGifos.querySelectorAll(
     "figure span .validate-favorite"
   );
+  
   if (listContainerSlider.length > 0) {
     renderSpanIconFavorite(listContainerSlider);
   }
@@ -81,51 +89,6 @@ closeModal.addEventListener("click", () => {
 });
 
 // funciones
-
-// crear el titulo de usuario y nombre del gifos
-function renderTitleUser(item, container) {
-  const h2User = document.createElement("h2");
-  const h3Title = document.createElement("h3");
-  h2User.innerText = item.username;
-  h2User.classList = "h2-title-search";
-  h3Title.innerText = item.title;
-  h3Title.classList = "h3-title-search";
-  container.appendChild(h2User);
-  container.appendChild(h3Title);
-}
-
-// mostrar los gifos aleatorios en el inicio
-function renderGifsInicio(item) {
-  const figure = document.createElement("figure");
-  const image = document.createElement("img");
-  const spanIcons = document.createElement("span");
-  image.classList = "loaderGifos";
-  image.onload = removeClassLoader;
-  image.src = item.images.original.url;
-  image.alt = item.title;
-  renderSpanIconsImages(item, spanIcons);
-  figure.appendChild(image);
-  figure.appendChild(spanIcons);
-  renderTitleUser(item, figure);
-  containerGifos.appendChild(figure);
-}
-
-// mostrar gifos al hacer la busqueda
-function renderGifsResultsClickSearch(item) {
-  const figure = document.createElement("figure");
-  const image = document.createElement("img");
-  const spanIcons = document.createElement("span");
-  image.classList = "loaderGifos";
-  image.src = item.images.original.url;
-  image.alt = item.title;
-  image.onload = removeClassLoader;
-  renderSpanIconsImages(item, spanIcons);
-  figure.appendChild(image);
-  figure.appendChild(spanIcons);
-  renderTitleUser(item, figure);
-  containerSearchResultsGifos.appendChild(figure);
-  seeMoreButton.style.display = "block";
-}
 
 // remover las sugerencias de busqueda
 function removeUlSearch() {
@@ -171,6 +134,17 @@ function showListSuggestions(e) {
   getResultsTags(inputSearch.value);
 }
 
+//ocultar botones de slider
+function hideButtonsSlide() {
+  buttonSliderLeft.forEach((item) => (item.style.display = "none"));
+  buttonSliderRight.forEach((item) => (item.style.display = "none"));
+}
+
+function showButtonsSlide() {
+  buttonSliderLeft.forEach((item) => (item.style.display = "block"));
+  buttonSliderRight.forEach((item) => (item.style.display = "block"));
+}
+
 // remover class despues de cargar el gif y validar si hay favoritos
 function removeClassLoader() {
   const imgs = document.querySelectorAll(".loaderGifos");
@@ -179,6 +153,7 @@ function removeClassLoader() {
     if (item.complete) {
       item.removeAttribute("class");
       renderSpanIconFavorite(listContainer);
+      showButtonsSlide()
     }
   });
 }
@@ -191,7 +166,8 @@ async function getResultsTags(keywords) {
     containerSearchGifos.style.display = "block";
     titleCategorySearch.innerHTML = keywords;
     showTitleImageSearch();
-    res.data.forEach(renderGifsResultsClickSearch);
+    renderGifo(res.data, containerSearchResultsGifos);
+    seeMoreButton.style.display = "block";
   } catch (error) {
     console.error(error);
   }
@@ -229,10 +205,13 @@ async function getLastGifs() {
       results = await apiGiphy.getTrendingGifs(3);
       res = await results.json();
     }
-    res.data.forEach(renderGifsInicio);
+    renderGifo(res.data, containerGifos);
   } catch (error) {
     console.error(error);
   }
 }
 
 getLastGifs();
+hideButtonsSlide();
+
+export { removeClassLoader };

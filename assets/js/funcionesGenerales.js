@@ -1,16 +1,69 @@
 "use strict";
 
 import apiGiphy from "../../api/index.js";
-const modalGifos = document.getElementById("openModal");
+import { removeClassLoader } from "./main.js";
 
-// crear los iconos de favoritos, descargar, expandir
-async function renderSpanIconsImages(item, container) {
-  const favoriteIcon = await favoriteIconGifo(item);
-  const downloadIcon = await downloadIconGifo(item);
-  const expandIcon = await expandIconGifo(item);
-  container.appendChild(favoriteIcon);
-  container.appendChild(downloadIcon);
-  container.appendChild(expandIcon);
+const modalGifos = document.getElementById("openModal");
+const containerModal = document.getElementById("containerOpenModal")
+
+// crear el gifo
+function renderGifo(list, container) {
+  list.forEach(async (item) => {
+    const figure = document.createElement("figure");
+    const image = document.createElement("img");
+    const h2User = document.createElement("h2");
+    const h3Title = document.createElement("h3");
+    const spanIcons = document.createElement("span");
+    const favoriteIcon = favoriteIconGifo(item);
+    const downloadIcon = await downloadIconGifo(item);
+    const expandIcon = expandIconGifo(item);
+
+    image.classList = "loaderGifos";
+    image.src = item.images.original.url;
+    image.alt = item.title;
+    image.onload = removeClassLoader;
+    spanIcons.appendChild(favoriteIcon);
+    spanIcons.appendChild(downloadIcon);
+    spanIcons.appendChild(expandIcon);
+    h2User.innerText = item.username;
+    h2User.classList = "h2-title-search";
+    h3Title.innerText = item.title;
+    h3Title.classList = "h3-title-search";
+    figure.appendChild(image);
+    figure.appendChild(spanIcons);
+    figure.appendChild(h2User);
+    figure.appendChild(h3Title);
+    container.appendChild(figure);
+  });
+}
+
+// crear modal gifo
+async function renderGifoModal(item, container) {
+    const figure = document.createElement("figure");
+    const image = document.createElement("img");
+    const h2User = document.createElement("h2");
+    const h3Title = document.createElement("h3");
+    const spanIcons = document.createElement("span");
+    const favoriteIcon = favoriteIconGifo(item);
+    const downloadIcon = await downloadIconGifo(item);
+    const expandIcon = expandIconGifo(item);
+
+    image.classList = "loaderGifos";
+    image.src = item.images.original.url;
+    image.alt = item.title;
+    image.onload = removeClassLoader;
+    spanIcons.appendChild(favoriteIcon);
+    spanIcons.appendChild(downloadIcon);
+    spanIcons.appendChild(expandIcon);
+    h2User.innerText = item.username;
+    h2User.classList = "h2-title-search";
+    h3Title.innerText = item.title;
+    h3Title.classList = "h3-title-search";
+    figure.appendChild(image);
+    figure.appendChild(spanIcons);
+    figure.appendChild(h2User);
+    figure.appendChild(h3Title);
+    container.appendChild(figure);
 }
 
 // para descargar el gifo
@@ -73,84 +126,6 @@ async function addFavoriteGifo() {
   localStorage.setItem("list", JSON.stringify(apiGiphy.localStorage));
 }
 
-// crear modal gifo
-async function createModalClick() {
-  modalGifos.style.display = "block";
-  const spanActionsGifos = modalGifos.querySelector(
-    ".container-actions-modal span"
-  );
-  const imgs = modalGifos.querySelectorAll(".container-actions-modal span img");
-  if (imgs.length > 0) {
-    imgs.forEach((element) => {
-      element.parentNode.removeChild(element);
-    });
-  }
-
-  let image = modalGifos.querySelector("figure img");
-  image.setAttribute("src", "assets/img/Spin-1s-200px.gif");
-  image.classList = "loaderGifos";
-
-  let favoriteIcon;
-  let downloadIcon;
-
-  const idGifo = this.getAttribute("data-id-gifo");
-  let title, user, url;
-  // validamos si existe en localStorage
-  const validate = apiGiphy.localStorage.filter((item) => {
-    if (item.id === idGifo) {
-      return item;
-    }
-  });
-  if (validate.length > 0) {
-    title = validate[0].title;
-    user = validate[0].user;
-    url = validate[0].images.original.url;
-    favoriteIcon = await favoriteIconGifo(validate[0]);
-    downloadIcon = await downloadIconGifo(validate[0]);
-  } else {
-    const resultId = await apiGiphy.getGifoId(idGifo);
-    const res = await resultId.json();
-    title = res.data.title;
-    user = res.data.username;
-    url = res.data.images.original.url;
-    favoriteIcon = await favoriteIconGifo(res.data);
-    downloadIcon = await downloadIconGifo(res.data);
-  }
-
-  // image.onload = removeClassLoader;
-  image.src = url;
-  image.alt = title;
-
-  const h2 = modalGifos.querySelector(".h2-actions-modal");
-  h2.innerHTML = user;
-  const h3 = modalGifos.querySelector(".h3-actions-modal");
-  h3.innerHTML = title;
-  spanActionsGifos.appendChild(favoriteIcon);
-  spanActionsGifos.appendChild(downloadIcon);
-
-  const listContainer = modalGifos.querySelectorAll(
-    ".container-actions-modal span .validate-favorite"
-  );
-  console.log(listContainer);
-  renderSpanIconFavorite(listContainer);
-}
-
-// validar si hay favoritos en localStorage y el container de gifos
-function renderSpanIconFavorite(lista) {
-  const listContainer = lista;
-  listContainer.forEach((item) => {
-    apiGiphy.localStorage.forEach((element) => {
-      if (item.getAttribute("data-id-gifo") === element.id) {
-        item.classList.remove("icon-default-favorite");
-        item.classList.remove("icon-favorite-hover");
-        item.classList.add("icon-add-favorite");
-        item.removeEventListener("click", addFavoriteGifo);
-        item.addEventListener("click", removeFavoriteGifo);
-      }
-    });
-  });
-}
-
 // remover gifo de favoritos
 async function removeFavoriteGifo() {
   const idGifo = this.getAttribute("data-id-gifo");
@@ -169,4 +144,49 @@ async function removeFavoriteGifo() {
   }
 }
 
-export { renderSpanIconsImages, downloadIconGifo, favoriteIconGifo, expandIconGifo, addFavoriteGifo, renderSpanIconFavorite, removeFavoriteGifo };
+// validar si hay favoritos en localStorage y el container de gifos
+function renderSpanIconFavorite(lista) {
+  const listContainer = lista;
+  listContainer.forEach((item) => {
+    apiGiphy.localStorage.forEach((element) => {
+      if (item.getAttribute("data-id-gifo") === element.id) {
+        item.classList.remove("icon-default-favorite");
+        item.classList.remove("icon-favorite-hover");
+        item.classList.add("icon-add-favorite");
+        item.removeEventListener("click", addFavoriteGifo);
+        item.addEventListener("click", removeFavoriteGifo);
+      }
+    });
+  });
+}
+
+// crear modal gifo
+async function createModalClick() {
+  modalGifos.style.display = "block";
+  
+  // validamos si existe en localStorage
+  const idGifo = this.getAttribute("data-id-gifo")
+  const validate = apiGiphy.localStorage.filter((item) => {
+    if (item.id === idGifo) {
+      return item;
+    }
+  });
+  if (validate.length > 0) {
+    renderGifoModal(validate[0], containerModal)
+  } else {
+    const resultId = await apiGiphy.getGifoId(idGifo);
+    const res = await resultId.json();
+    renderGifoModal(res.data, containerModal)
+  }
+}
+
+
+export {
+  downloadIconGifo,
+  favoriteIconGifo,
+  expandIconGifo,
+  addFavoriteGifo,
+  renderSpanIconFavorite,
+  removeFavoriteGifo,
+  renderGifo,
+};
