@@ -37,35 +37,6 @@ function renderGifo(list, container) {
   });
 }
 
-// crear modal gifo
-async function renderGifoModal(item, container) {
-    const figure = document.createElement("figure");
-    const image = document.createElement("img");
-    const h2User = document.createElement("h2");
-    const h3Title = document.createElement("h3");
-    const spanIcons = document.createElement("span");
-    const favoriteIcon = favoriteIconGifo(item);
-    const downloadIcon = await downloadIconGifo(item);
-    const expandIcon = expandIconGifo(item);
-
-    image.classList = "loaderGifos";
-    image.src = item.images.original.url;
-    image.alt = item.title;
-    image.onload = removeClassLoader;
-    spanIcons.appendChild(favoriteIcon);
-    spanIcons.appendChild(downloadIcon);
-    spanIcons.appendChild(expandIcon);
-    h2User.innerText = item.username;
-    h2User.classList = "h2-title-search";
-    h3Title.innerText = item.title;
-    h3Title.classList = "h3-title-search";
-    figure.appendChild(image);
-    figure.appendChild(spanIcons);
-    figure.appendChild(h2User);
-    figure.appendChild(h3Title);
-    container.appendChild(figure);
-}
-
 // para descargar el gifo
 async function downloadIconGifo(item) {
   const downloadIcon = document.createElement("img");
@@ -160,6 +131,21 @@ function renderSpanIconFavorite(lista) {
   });
 }
 
+// remover icono de favoritos la cerrar el modal
+function renderRemoveIconFavorite(container, idGifo, classIcon) {
+  if(classIcon === null) {
+    container.forEach(item => {
+      if(item.getAttribute("data-id-gifo") === idGifo) {
+        item.classList.add("icon-default-favorite");
+        item.classList.add("icon-favorite-hover");
+        item.classList.remove("icon-add-favorite");
+        item.addEventListener("click", addFavoriteGifo);
+        item.removeEventListener("click", removeFavoriteGifo);
+      }
+    })
+  }
+}
+
 // crear modal gifo
 async function createModalClick() {
   modalGifos.style.display = "block";
@@ -172,21 +158,18 @@ async function createModalClick() {
     }
   });
   if (validate.length > 0) {
-    renderGifoModal(validate[0], containerModal)
+    renderGifo(validate, containerModal)
   } else {
     const resultId = await apiGiphy.getGifoId(idGifo);
     const res = await resultId.json();
-    renderGifoModal(res.data, containerModal)
+    let data = []
+    data.push(res.data);
+    renderGifo(data, containerModal)
   }
 }
 
-
 export {
-  downloadIconGifo,
-  favoriteIconGifo,
-  expandIconGifo,
-  addFavoriteGifo,
   renderSpanIconFavorite,
-  removeFavoriteGifo,
   renderGifo,
+  renderRemoveIconFavorite
 };

@@ -1,9 +1,7 @@
 "use strict";
 
 import apiGiphy from "../../api/index.js";
-import { renderSpanIconFavorite, renderGifo } from "./funcionesGenerales.js";
-
-console.log(apiGiphy);
+import { renderSpanIconFavorite, renderGifo, renderRemoveIconFavorite } from "./funcionesGenerales.js";
 
 const containerGifos = document.querySelector(".containerImgGifos"); //resultados de gifos slide
 const containerSearchGifos = document.getElementById("resultsGifos"); //resultados de gifos busqueda
@@ -18,7 +16,7 @@ const iconClose = document.querySelector(".iconClose");
 const titleCategorySearch = document.getElementById("titleCategorySearch");
 const seeMoreButton = document.getElementById("verMasGifs");
 const modalGifos = document.getElementById("openModal");
-const containerModal = document.getElementById("containerOpenModal")
+const containerModal = document.getElementById("containerOpenModal");
 const closeModal = document.querySelector(".closeModal");
 const buttonSliderLeft = document.querySelectorAll(".buttonSliderLeft");
 const buttonSliderRight = document.querySelectorAll(".buttonSliderRight");
@@ -66,26 +64,33 @@ seeMoreButton.addEventListener("click", async () => {
 // click cerrar modal
 closeModal.addEventListener("click", () => {
   const imgs = containerModal.querySelectorAll("figure");
+  const favoriteIcon = containerModal.querySelector(".validate-favorite");
+  const classFavorite = containerModal.querySelector(".icon-add-favorite");
+  const idGifo = favoriteIcon.getAttribute("data-id-gifo");
+
   if (imgs.length > 0) {
     imgs.forEach((element) => {
       element.parentNode.removeChild(element);
     });
   }
 
-  modalGifos.style.display = "none";
   const listContainerSlider = containerGifos.querySelectorAll(
     "figure span .validate-favorite"
   );
   const listContainerSearch = containerSearchGifos.querySelectorAll(
     "figure span .validate-favorite"
   );
-  
+
   if (listContainerSlider.length > 0) {
     renderSpanIconFavorite(listContainerSlider);
+    renderRemoveIconFavorite(listContainerSlider, idGifo, classFavorite);
   }
   if (listContainerSearch.length > 0) {
     renderSpanIconFavorite(listContainerSearch);
+    renderRemoveIconFavorite(listContainerSlider, idGifo, classFavorite);
   }
+
+  modalGifos.style.display = "none";
 });
 
 // funciones
@@ -134,16 +139,6 @@ function showListSuggestions(e) {
   getResultsTags(inputSearch.value);
 }
 
-//ocultar botones de slider
-function hideButtonsSlide() {
-  buttonSliderLeft.forEach((item) => (item.style.display = "none"));
-  buttonSliderRight.forEach((item) => (item.style.display = "none"));
-}
-
-function showButtonsSlide() {
-  buttonSliderLeft.forEach((item) => (item.style.display = "block"));
-  buttonSliderRight.forEach((item) => (item.style.display = "block"));
-}
 
 // remover class despues de cargar el gif y validar si hay favoritos
 function removeClassLoader() {
@@ -153,7 +148,6 @@ function removeClassLoader() {
     if (item.complete) {
       item.removeAttribute("class");
       renderSpanIconFavorite(listContainer);
-      showButtonsSlide()
     }
   });
 }
@@ -212,6 +206,5 @@ async function getLastGifs() {
 }
 
 getLastGifs();
-hideButtonsSlide();
 
 export { removeClassLoader };

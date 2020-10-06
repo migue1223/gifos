@@ -16,7 +16,7 @@ class apiGipgy {
   async getResultsCategory(keywords) {
     try {
       return await fetch(
-        `${this.API_URL_SEARCH}q=${keywords.toLowerCase()}&api_key=${this.API_KEY}&limit=12&lang=es`
+        `${this.API_URL_SEARCH}q=${keywords.toLowerCase()}&api_key=${this.API_KEY}&limit=12&lang=es`, {cache: "force-cache"}
       );
     } catch (error) {
       console.error(error);
@@ -27,7 +27,7 @@ class apiGipgy {
   async getSuggestionsListCategory(keywords) {
     try {
       return await fetch(
-        `${this.API_URL_TAGS}q=${keywords.toLowerCase()}&api_key=${this.API_KEY}&limit=5&lang=es`
+        `${this.API_URL_TAGS}q=${keywords.toLowerCase()}&api_key=${this.API_KEY}&limit=5&lang=es`, {cache: "force-cache"}
       );
     } catch (error) {
       console.error(error);
@@ -38,7 +38,7 @@ class apiGipgy {
   async getTrendingGifs(limit) {
     try {
       return await fetch(
-        `${this.API_URL_TRENDING}api_key=${this.API_KEY}&limit=${limit}&lang=es`
+        `${this.API_URL_TRENDING}api_key=${this.API_KEY}&limit=${limit}&lang=es`, {cache: "force-cache"}
       );
     } catch (error) {
       console.error(error);
@@ -49,7 +49,7 @@ class apiGipgy {
   async getSeeMoreGifos(keywords, offset) {
     try {
       return await fetch(
-        `${this.API_URL_SEARCH}q=${keywords.toLowerCase()}&api_key=${this.API_KEY}&limit=12&offset=${offset}&lang=es`
+        `${this.API_URL_SEARCH}q=${keywords.toLowerCase()}&api_key=${this.API_KEY}&limit=12&offset=${offset}&lang=es`, {cache: "force-cache"}
       );
     } catch (error) {
       console.error(error);
@@ -59,7 +59,7 @@ class apiGipgy {
   // buscar gifo id
   async getGifoId(idGifo) {
     try {
-      return await fetch(`${this.API_URL_SEARCH_ID}${idGifo}?api_key=${this.API_KEY}`);
+      return await fetch(`${this.API_URL_SEARCH_ID}${idGifo}?api_key=${this.API_KEY}`, {cache: "force-cache"});
     } catch (error) {
       console.error(error);
     }
