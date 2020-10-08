@@ -111,6 +111,9 @@ body {
 .headerFigure {
   margin-left: 168px;
 }
+.headerFigure:hover {
+  cursor: pointer;
+}
 /* nav */
 .botoneraMovil {
   margin-right: 168px;
@@ -293,6 +296,96 @@ body {
   display: none;
 }
 
+/* mis favoritos gifos */
+/* mis gifos favoritos */
+.misGifosFavoritos {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.misGifosFavoritos h2 {
+  font-family: "Montserrat";
+  font-size: 25px;
+  font-weight: bold;
+  color: #572ee5;
+  text-align: center;
+  line-height: 30px;
+  background-color: white;
+  margin-top: 8px;
+  margin-bottom: 36px;
+}
+
+.containerMisGifosFavoritos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerMisGifosFavoritos figure {
+  width: 260px;
+  height: 200px;
+  margin: 21px 21px;
+}
+
+.containerMisGifosFavoritos figure img {
+  width: 260px;
+  height: 200px;
+}
+
+.containerMisGifosFavoritos figure span {
+  display: none;
+  margin-left: 59%;
+  margin-top: -77%;
+}
+
+.containerMisGifosFavoritos figure span img {
+  margin: 0 5px;
+  width: 25px;
+  height: 25px;
+}
+
+.containerMisGifosFavoritos figure h2 {
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  color: #ffffff;
+  text-align: left;
+  margin-bottom: 0;
+  margin-left: 5%;
+  margin-top: 30%;
+  display: none;
+}
+
+.containerMisGifosFavoritos figure h3 {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: left;
+  margin-left: 5%;
+  display: none;
+}
+.verMasGifosFavoritos {
+  width: 127px;
+  height: 50px;
+  border: 1px solid #572ee5;
+  border-radius: 25px;
+  border-radius: 25px;
+  background-color: #fff;
+  color: #572ee5;
+  font-weight: bold;
+  outline: none;
+  margin-top: 78px;
+  margin-bottom: 78px;
+}
+
+.verMasGifosFavoritos:hover {
+  cursor: pointer;
+  background-color: #572ee5;
+  color: #fff;
+}
+
 .icon-favorite-hover:hover {
   background-image: url(../img/icon-fav-hover.svg);
   background-repeat: no-repeat;
@@ -472,6 +565,7 @@ body {
   font-weight: bold;
   outline: none;
   margin-top: 78px;
+  margin-bottom: 58px;
   display: none;
 }
 .verMasGifos:hover {
@@ -675,6 +769,35 @@ body {
   .contentResultsGifos span img:hover {
     cursor: pointer;
   }
+  /* content mis gifos */
+  .misGifosFavoritos figure img:hover {
+    cursor: pointer;
+  }
+
+  .misGifosFavoritos figure img:hover ~ h2 {
+    display: block;
+  }
+
+  .misGifosFavoritos figure img:hover ~ h3 {
+    display: block;
+  }
+
+  .misGifosFavoritos figure img:hover + span {
+    display: block;
+  }
+
+  .misGifosFavoritos span:hover {
+    display: block;
+  }
+  .misGifosFavoritos span:hover ~ h2 {
+    display: block;
+  }
+  .misGifosFavoritos span:hover ~ h3 {
+    display: block;
+  }
+  .misGifosFavoritos span img:hover {
+    cursor: pointer;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -708,7 +831,7 @@ body {
     display: none;
   }
 
-  .containerImgGifos .buttonSliderRight{
+  .containerImgGifos .buttonSliderRight {
     display: none;
   }
   .modalDialog {
@@ -722,7 +845,7 @@ body {
     position: initial;
     margin-left: 70%;
     margin-top: -77%;
-  } 
+  }
   .contentResultsGifos figure span img {
     margin: 0 3px;
     width: 20px;
@@ -941,7 +1064,7 @@ body {
   .contentResultsGifos figure span {
     margin-left: 50%;
     margin-top: -79%;
-  } 
+  }
 }
 
 @media (max-width: 425px) {
@@ -984,5 +1107,5 @@ body {
   .contentResultsGifos figure span {
     margin-left: 40%;
     margin-top: -95%;
-  } 
+  }
 }

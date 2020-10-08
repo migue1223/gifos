@@ -1,10 +1,10 @@
 "use strict";
 
 import apiGiphy from "../../api/index.js";
-import { removeClassLoader } from "./main.js";
+import { removeClassLoader, avanzarSlider, retrocederSlider } from "./main.js";
 
 const modalGifos = document.getElementById("openModal");
-const containerModal = document.getElementById("containerOpenModal")
+const containerModal = document.getElementById("containerOpenModal");
 
 // crear el gifo
 function renderGifo(list, container) {
@@ -90,7 +90,7 @@ async function addFavoriteGifo() {
   apiGiphy.localStorage.push({
     id: idGifo,
     title: titleGifo,
-    user: userGifo,
+    username: userGifo,
     images: { original: { url: urlGifo } },
   });
 
@@ -133,43 +133,42 @@ function renderSpanIconFavorite(lista) {
 
 // remover icono de favoritos la cerrar el modal
 function renderRemoveIconFavorite(container, idGifo, classIcon) {
-  if(classIcon === null) {
-    container.forEach(item => {
-      if(item.getAttribute("data-id-gifo") === idGifo) {
+  if (classIcon === null) {
+    container.forEach((item) => {
+      if (item.getAttribute("data-id-gifo") === idGifo) {
         item.classList.add("icon-default-favorite");
         item.classList.add("icon-favorite-hover");
         item.classList.remove("icon-add-favorite");
         item.addEventListener("click", addFavoriteGifo);
         item.removeEventListener("click", removeFavoriteGifo);
       }
-    })
+    });
   }
 }
 
 // crear modal gifo
 async function createModalClick() {
   modalGifos.style.display = "block";
-  
+  const buttonSliderLeft = document.querySelector(".buttonSliderLeft");
+  const buttonSliderRight = document.querySelector(".buttonSliderRight");
+  buttonSliderRight.addEventListener("click", avanzarSlider);
+  buttonSliderLeft.addEventListener("click", retrocederSlider);
   // validamos si existe en localStorage
-  const idGifo = this.getAttribute("data-id-gifo")
+  const idGifo = this.getAttribute("data-id-gifo");
   const validate = apiGiphy.localStorage.filter((item) => {
     if (item.id === idGifo) {
       return item;
     }
   });
   if (validate.length > 0) {
-    renderGifo(validate, containerModal)
+    renderGifo(validate, containerModal);
   } else {
     const resultId = await apiGiphy.getGifoId(idGifo);
     const res = await resultId.json();
-    let data = []
+    let data = [];
     data.push(res.data);
-    renderGifo(data, containerModal)
+    renderGifo(data, containerModal);
   }
 }
 
-export {
-  renderSpanIconFavorite,
-  renderGifo,
-  renderRemoveIconFavorite
-};
+export { renderSpanIconFavorite, renderGifo, renderRemoveIconFavorite };

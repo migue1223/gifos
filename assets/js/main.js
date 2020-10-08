@@ -1,25 +1,35 @@
 "use strict";
 
 import apiGiphy from "../../api/index.js";
-import { renderSpanIconFavorite, renderGifo, renderRemoveIconFavorite } from "./funcionesGenerales.js";
+import {
+  renderSpanIconFavorite,
+  renderGifo,
+  renderRemoveIconFavorite,
+} from "./funcionesGenerales.js";
 
 const containerGifos = document.querySelector(".containerImgGifos"); //resultados de gifos slide
 const containerSearchGifos = document.getElementById("resultsGifos"); //resultados de gifos busqueda
 const containerSearchResultsGifos = document.querySelector(
   ".contentResultsGifos"
 );
+const containerMisGifos = document.querySelector(".misGifosFavoritos");
+const containerMisGifosFavoritos = document.getElementById(
+  "containerMisGifosFavoritos"
+);
+const containerBuscador = document.querySelector(".sectionBuscador");
+
 const inputSearch = document.getElementById("inputSearch");
 const titleBuscador = document.querySelector(".titleBuscador");
 const imageBuscador = document.querySelector(".imageBuscador");
-const iconSearch = document.querySelector(".iconSearch");
-const iconClose = document.querySelector(".iconClose");
-const titleCategorySearch = document.getElementById("titleCategorySearch");
-const seeMoreButton = document.getElementById("verMasGifs");
-const modalGifos = document.getElementById("openModal");
 const containerModal = document.getElementById("containerOpenModal");
 const closeModal = document.querySelector(".closeModal");
-const buttonSliderLeft = document.querySelectorAll(".buttonSliderLeft");
-const buttonSliderRight = document.querySelectorAll(".buttonSliderRight");
+const titleMisGifos = document.getElementById("misGifosFavoritos");
+const titleGifos = document.getElementById("misGifos");
+const iconClose = document.querySelector(".iconClose");
+const iconSearch = document.querySelector(".iconSearch");
+const seeMoreButton = document.getElementById("verMasGifs");
+const seeMoreButtonFavorite = document.getElementById("verMasGifsFavoritos");
+const imageHeader = document.querySelector(".headerFigure");
 
 // click input search & iconClose
 inputSearch.addEventListener("click", hideTitleImageSearch);
@@ -47,13 +57,12 @@ inputSearch.addEventListener("keyup", (e) => {
 });
 
 // click button ver mas
+let offset = 0;
 seeMoreButton.addEventListener("click", async () => {
   const keywords = document.getElementById("titleCategorySearch").innerHTML;
-  const offset = +seeMoreButton.getAttribute("offset");
-  const updateValueOffset = offset + 12;
-  updateOffset(updateValueOffset);
+  offset = offset + 12;
   try {
-    const results = await apiGiphy.getSeeMoreGifos(keywords, updateValueOffset);
+    const results = await apiGiphy.getSeeMoreGifos(keywords, offset);
     const res = await results.json();
     renderGifo(res.data, containerSearchResultsGifos);
   } catch (error) {
@@ -67,6 +76,7 @@ closeModal.addEventListener("click", () => {
   const favoriteIcon = containerModal.querySelector(".validate-favorite");
   const classFavorite = containerModal.querySelector(".icon-add-favorite");
   const idGifo = favoriteIcon.getAttribute("data-id-gifo");
+  const modalGifos = document.getElementById("openModal");
 
   if (imgs.length > 0) {
     imgs.forEach((element) => {
@@ -93,17 +103,70 @@ closeModal.addEventListener("click", () => {
   modalGifos.style.display = "none";
 });
 
+// click en mis favoritos
+titleMisGifos.addEventListener("click", () => {
+  containerBuscador.style.display = "none";
+  containerMisGifos.style.display = "flex";
+
+  const imgs = containerMisGifosFavoritos.querySelectorAll("figure");
+  if (imgs.length > 0) {
+    imgs.forEach((element) => {
+      element.parentNode.removeChild(element);
+    });
+  }
+
+  if (apiGiphy.localStorage.length < 12) {
+    seeMoreButtonFavorite.style.display = "none";
+    containerMisGifosFavoritos.style.marginBottom = "78px";
+  } else {
+    seeMoreButtonFavorite.style.display = "initial";
+    containerMisGifosFavoritos.style.marginBottom = "0px";
+  }
+  renderGifo(apiGiphy.localStorage.slice(0, 12), containerMisGifosFavoritos);
+});
+
+// click button ver mas favoritos
+let offsetInicio = 0;
+let offsetFin = 12;
+seeMoreButtonFavorite.addEventListener("click", async () => {
+  offsetInicio = offsetInicio + 12;
+  offsetFin = offsetFin + 12;
+  try {
+    renderGifo(
+      apiGiphy.localStorage.slice(offsetInicio, offsetFin),
+      containerMisGifosFavoritos
+    );
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+// click en title gifos
+titleGifos.addEventListener("click", () => {
+  containerMisGifos.style.display = "none";
+  containerBuscador.style.display = "flex";
+});
+
+// click en image header
+imageHeader.addEventListener("click", () => {
+  containerMisGifos.style.display = "none";
+  containerBuscador.style.display = "flex";
+});
+
 // funciones
+function avanzarSlider() {
+  // const indexSlider = apiGiphy.localStorage.indexOf();
+  console.log("test");
+}
+
+function retrocederSlider() {
+  console.log("test");
+}
 
 // remover las sugerencias de busqueda
 function removeUlSearch() {
   const ulContainerSearch = document.querySelectorAll(".ulContentSearch");
   ulContainerSearch.forEach((item) => (item.style.display = "none"));
-}
-
-// actualizar el offset
-function updateOffset(value) {
-  seeMoreButton.setAttribute("offset", value);
 }
 
 // ocultar Titulo y Logo Inicio
@@ -139,7 +202,6 @@ function showListSuggestions(e) {
   getResultsTags(inputSearch.value);
 }
 
-
 // remover class despues de cargar el gif y validar si hay favoritos
 function removeClassLoader() {
   const imgs = document.querySelectorAll(".loaderGifos");
@@ -155,6 +217,7 @@ function removeClassLoader() {
 // obtener los resultados al elegir la busqueda
 async function getResultsTags(keywords) {
   try {
+    const titleCategorySearch = document.getElementById("titleCategorySearch");
     const results = await apiGiphy.getResultsCategory(keywords);
     const res = await results.json();
     containerSearchGifos.style.display = "block";
@@ -207,4 +270,4 @@ async function getLastGifs() {
 
 getLastGifs();
 
-export { removeClassLoader };
+export { removeClassLoader, avanzarSlider, retrocederSlider };

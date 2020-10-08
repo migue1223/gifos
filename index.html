@@ -39,9 +39,9 @@
       <label for="botonMovil" class="labelMovil"><span></span></label>
       <nav class="botoneraMovil">
         <ul>
-          <li><a href="#episodios">Modo Nocturno</a></li>
-          <li><a href="#nosotros">Favoritos</a></li>
-          <li><a href="#entrevistas">Mis GIFOS</a></li>
+          <li><a href="#">Modo Nocturno</a></li>
+          <li id="misGifosFavoritos"><a href="#favoritos">Favoritos</a></li>
+          <li id="misGifos"><a href="#mis-gifos">Mis GIFOS</a></li>
           <img
             class="crearGifos"
             id="crearGifos"
@@ -61,21 +61,21 @@
         <img src="assets/img/ilustra_header.svg" alt="Ilustra" />
       </figure>
       <div>
-          <input
-            id="inputSearch"
-            type="text"
-            placeholder="Busca GIFOS y más"
-            autocomplete="off"
-          />
-          <span
-            ><img
-              class="iconSearch"
-              src="assets/img/icon-search.svg"
-              alt="Search" /><img
-              class="iconClose"
-              src="assets/img/close.svg"
-              alt="Close"
-          /></span>
+        <input
+          id="inputSearch"
+          type="text"
+          placeholder="Busca GIFOS y más"
+          autocomplete="off"
+        />
+        <span
+          ><img
+            class="iconSearch"
+            src="assets/img/icon-search.svg"
+            alt="Search" /><img
+            class="iconClose"
+            src="assets/img/close.svg"
+            alt="Close"
+        /></span>
       </div>
       <p class="trending">Trending:</p>
       <div class="containerTrendingP">
@@ -87,7 +87,19 @@
         <h2 id="titleCategorySearch"></h2>
         <div class="contentResultsGifos"></div>
       </div>
-      <button class="verMasGifos" offset="0" id="verMasGifs">VER MAS...</button>
+      <button class="verMasGifos" id="verMasGifs">VER MAS...</button>
+    </section>
+
+    <section class="misGifosFavoritos">
+      <img src="assets/img/icon-favoritos.svg" alt="Favoritos" />
+      <h2 class="trendingGifos">Favoritos</h2>
+      <div
+        class="containerMisGifosFavoritos"
+        id="containerMisGifosFavoritos"
+      ></div>
+      <button class="verMasGifosFavoritos" id="verMasGifsFavoritos">
+        VER MAS...
+      </button>
     </section>
 
     <section class="trendingGifos">
