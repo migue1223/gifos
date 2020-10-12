@@ -10,7 +10,8 @@ class apiGipgy {
     this.API_URL_TRENDING = "https://api.giphy.com/v1/gifs/trending?";
     this.API_URL_TAGS = "https://api.giphy.com/v1/gifs/search/tags?";
     this.API_URL_SEARCH_ID = "https://api.giphy.com/v1/gifs/";
-    this.localStorage = JSON.parse(localStorage.getItem("list")) || [];
+    this.localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
+    this.localStorageTrending = JSON.parse(localStorage.getItem("listTrending")) || [];
   }
   // obtener los resultados al elegir la busqueda
   async getResultsCategory(keywords) {
@@ -38,7 +39,7 @@ class apiGipgy {
   async getTrendingGifs(limit) {
     try {
       return await fetch(
-        `${this.API_URL_TRENDING}api_key=${this.API_KEY}&limit=${limit}&lang=es`, {cache: "force-cache"}
+        `${this.API_URL_TRENDING}api_key=${this.API_KEY}&lang=es`, {cache: "force-cache"}
       );
     } catch (error) {
       console.error(error);
