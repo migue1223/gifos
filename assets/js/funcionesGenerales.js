@@ -116,7 +116,7 @@ async function removeFavoriteGifo() {
   });
   if (validate === -1) {
     apiGiphy.localStorageFavorites.splice(validate, 1);
-    localStorageFavorites.setItem(
+    localStorage.setItem(
       "listFavorites",
       JSON.stringify(apiGiphy.localStorageFavorites)
     );
@@ -157,6 +157,7 @@ function renderRemoveIconFavorite(container, idGifo, classIcon) {
 // crear modal gifo
 async function createModalClick() {
   modalGifos.style.display = "block";
+  let img;
   const buttonSliderLeft = document.querySelector(".buttonSliderLeft");
   const buttonSliderRight = document.querySelector(".buttonSliderRight");
   buttonSliderRight.addEventListener("click", avanzarSlider);
@@ -171,10 +172,12 @@ async function createModalClick() {
       return item;
     }
   });
+
   if (validate.length > 0) {
     renderGifo(validate, containerModal, classSlider);
     buttonSliderLeft.style.visibility = "visible";
     buttonSliderRight.style.visibility = "visible";
+    img = containerModal.querySelector("figure")
   } else {
     const resultId = await apiGiphy.getGifoId(idGifo);
     const res = await resultId.json();
@@ -183,7 +186,9 @@ async function createModalClick() {
     renderGifo(data, containerModal, classSlider);
     buttonSliderLeft.style.visibility = "visible";
     buttonSliderRight.style.visibility = "visible";
+    img = containerModal.querySelector("figure")
   }
+
 }
 
 export { renderSpanIconFavorite, renderGifo, renderRemoveIconFavorite };

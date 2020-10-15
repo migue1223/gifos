@@ -1,0 +1,53 @@
+.dark-mode {
+  background-color: #37383c !important;
+  color: white !important;
+}
+
+.container-dark-mode {
+  background-color: #222326 !important;
+}
+
+.text-dark-mode {
+  color: white !important;
+  background-color: none !important;
+}
+
+.input-dark-mode {
+  background: #37383c !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+}
+
+.hover-button-dark-mode {
+  color: black !important;
+  border: 1px solid white !important;
+}
+
+.hover-button-dark-mode:hover {
+  background-color: black !important;
+  color: white !important;
+}
+
+.hover-slider-left:hover {
+  background: #ffffff !important;
+  color: black !important;
+}
+
+.hover-slider-right:hover {
+  background: #ffffff !important;
+}
+
+.h2-title-search-dark-mode {
+  font-family: "Roboto" !important;
+  font-size: 15px !important;
+  text-align: left !important;
+  color: #ffffff !important;
+}
+
+.h3-title-search-dark-mode {
+  font-family: 'Roboto' !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+  text-align: left !important;
+  color: #ffffff !important;
+}

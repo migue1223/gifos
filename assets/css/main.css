@@ -100,6 +100,7 @@ html,
 body {
   overflow-x: hidden;
 }
+
 /* header container */
 .headerContainer {
   width: 100%;
@@ -128,6 +129,9 @@ body {
 }
 .botoneraMovil ul li {
   margin-right: 41.5px;
+}
+.botoneraMovil ul li:last-child {
+  margin-right: 0;
 }
 .botoneraMovil ul li a {
   font-family: "Montserrat";
@@ -296,7 +300,6 @@ body {
   display: none;
 }
 
-/* mis favoritos gifos */
 /* mis gifos favoritos */
 .misGifosFavoritos {
   display: none;
@@ -366,7 +369,8 @@ body {
   margin-left: 5%;
   display: none;
 }
-.verMasGifosFavoritos {
+.verMasGifosFavoritos,
+.verMasMisGifos {
   width: 127px;
   height: 50px;
   border: 1px solid #572ee5;
@@ -461,6 +465,28 @@ body {
   background-color: #f4f5f9;
 }
 
+.notFoundFavorites {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.notFoundFavorites img {
+  margin-bottom: 23.7px;
+}
+
+.notFoundFavorites p {
+  margin-bottom: 137px;
+  width: 431px;
+  font-family: "Montserrat";
+  font-size: 22px;
+  font-weight: bold;
+  color: #50e3c2;
+  text-align: center;
+  line-height: 33px;
+}
+
 /* secction gifos */
 .trendingGifos {
   display: flex;
@@ -468,19 +494,22 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #f4f5f9;
+  border: 0px black;
+}
+.trendingGifos h2 {
+  margin-top: 51px;
+  font-family: 'Montserrat';
+  font-size: 25px;
+  font-weight: bold;
+  color: #572ee5;
+  text-align: center;
+  line-height: 30px;
+  margin-bottom: 13px;
 }
 .trendingGifos div {
   display: flex;
 }
-.trendingGifos h2 {
-  margin-top: 46px;
-  font-family: "Montserrat", sans-serif;
-  font-size: 25px;
-  color: #572ee5;
-  text-align: center;
-  line-height: 30px;
-  margin-bottom: 7px;
-}
+
 .trendingGifos p {
   font-family: "Roboto", sans-serif;
   font-size: 18px;
@@ -489,7 +518,7 @@ body {
   line-height: 23px;
 }
 .pGifos {
-  margin-bottom: 32px;
+  margin-bottom: 53px;
 }
 /* container images gifos */
 .containerImgGifos {
@@ -498,6 +527,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #f4f5f9;
+  border: 0px black;
 }
 
 .containerImgGifos figure {
@@ -507,6 +537,7 @@ body {
   margin: 0 22px;
   margin-bottom: 82px;
 }
+
 .containerImgGifos figure h2 {
   font-family: "Roboto";
   font-size: 15px;
@@ -664,8 +695,8 @@ body {
 .modalDialog > div span img:hover {
   cursor: pointer;
 }
+/* modal */
 .close {
-  background: #fff;
   color: #000;
   line-height: 25px;
   position: absolute;
@@ -678,6 +709,62 @@ body {
   -webkit-border-radius: 12px;
   -moz-border-radius: 12px;
   border-radius: 12px;
+}
+
+/* container mis gifos */
+.misGifos {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.notFoundMisGifos {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.notFoundMisGifos img {
+  margin-top: 111px;
+  margin-bottom: 40px;
+}
+
+.notFoundMisGifos p {
+  font-family: "Montserrat";
+  font-size: 22px;
+  font-weight: bold;
+  color: #50e3c2;
+  text-align: center;
+  line-height: 25px;
+  margin-bottom: 136px;
+}
+
+.verMasMisGifos {
+  display: none;
+}
+.verMasMisGifos:hover {
+  cursor: pointer;
+  background-color: #572ee5;
+  color: #fff;
+}
+
+.titleMisGifos {
+  font-family: "Montserrat";
+  font-size: 25px;
+  font-weight: bold;
+  color: #572ee5;
+  text-align: center;
+  line-height: 30px;
+  background-color: white;
+  margin-top: 8px;
+  margin-bottom: 36px;
+}
+
+/* crear gifos */
+.crearGifos:hover {
+  cursor: pointer;
 }
 
 /* footer */

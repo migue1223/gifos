@@ -1,6 +1,6 @@
 "use strict";
 
-import API_KEY from '../config/index.js';
+import API_KEY from "../config/index.js";
 
 class apiGipgy {
   constructor() {
@@ -10,14 +10,23 @@ class apiGipgy {
     this.API_URL_TRENDING = "https://api.giphy.com/v1/gifs/trending?";
     this.API_URL_TAGS = "https://api.giphy.com/v1/gifs/search/tags?";
     this.API_URL_SEARCH_ID = "https://api.giphy.com/v1/gifs/";
-    this.localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
-    this.localStorageTrending = JSON.parse(localStorage.getItem("listTrending")) || [];
+    this.localStorageFavorites =
+      JSON.parse(localStorage.getItem("listFavorites")) || [];
+    this.localStorageTrending =
+      JSON.parse(localStorage.getItem("listTrending")) || [];
+    this.localStorageSearch =
+      JSON.parse(localStorage.getItem("listSearch")) || [];
+    this.localStorageMisGifos =
+      JSON.parse(localStorage.getItem("listMisGifos")) || [];
   }
   // obtener los resultados al elegir la busqueda
   async getResultsCategory(keywords) {
     try {
       return await fetch(
-        `${this.API_URL_SEARCH}q=${keywords.toLowerCase()}&api_key=${this.API_KEY}&limit=12&lang=es`, {cache: "force-cache"}
+        `${this.API_URL_SEARCH}q=${keywords.toLowerCase()}&api_key=${
+          this.API_KEY
+        }&limit=12&lang=es`,
+        { cache: "force-cache" }
       );
     } catch (error) {
       console.error(error);
@@ -28,7 +37,10 @@ class apiGipgy {
   async getSuggestionsListCategory(keywords) {
     try {
       return await fetch(
-        `${this.API_URL_TAGS}q=${keywords.toLowerCase()}&api_key=${this.API_KEY}&limit=5&lang=es`, {cache: "force-cache"}
+        `${this.API_URL_TAGS}q=${keywords.toLowerCase()}&api_key=${
+          this.API_KEY
+        }&limit=5&lang=es`,
+        { cache: "force-cache" }
       );
     } catch (error) {
       console.error(error);
@@ -36,10 +48,11 @@ class apiGipgy {
   }
 
   // obtener ultimos gifs en inicio
-  async getTrendingGifs(limit) {
+  async getTrendingGifs(limit, offset) {
     try {
       return await fetch(
-        `${this.API_URL_TRENDING}api_key=${this.API_KEY}&lang=es`, {cache: "force-cache"}
+        `${this.API_URL_TRENDING}api_key=${this.API_KEY}&limit=${limit}&offset=${offset}&lang=es`,
+        { cache: "force-cache" }
       );
     } catch (error) {
       console.error(error);
@@ -47,10 +60,13 @@ class apiGipgy {
   }
 
   // button ver mas gifos
-  async getSeeMoreGifos(keywords, offset) {
+  async getSeeMoreGifos(keywords, offset, limit) {
     try {
       return await fetch(
-        `${this.API_URL_SEARCH}q=${keywords.toLowerCase()}&api_key=${this.API_KEY}&limit=12&offset=${offset}&lang=es`, {cache: "force-cache"}
+        `${this.API_URL_SEARCH}q=${keywords.toLowerCase()}&api_key=${
+          this.API_KEY
+        }&limit=${limit}&offset=${offset}&lang=es`,
+        { cache: "force-cache" }
       );
     } catch (error) {
       console.error(error);
@@ -60,7 +76,10 @@ class apiGipgy {
   // buscar gifo id
   async getGifoId(idGifo) {
     try {
-      return await fetch(`${this.API_URL_SEARCH_ID}${idGifo}?api_key=${this.API_KEY}`, {cache: "force-cache"});
+      return await fetch(
+        `${this.API_URL_SEARCH_ID}${idGifo}?api_key=${this.API_KEY}`,
+        { cache: "force-cache" }
+      );
     } catch (error) {
       console.error(error);
     }

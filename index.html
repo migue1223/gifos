@@ -9,6 +9,7 @@
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="assets/css/dark.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <title>Gifos</title>
   </head>
@@ -33,21 +34,23 @@
 
     <header class="headerContainer">
       <figure class="headerFigure">
-        <img src="assets/img/logo-mobile.svg" alt="Logo" />
+        <img src="assets/img/logo-desktop.svg" alt="Logo" />
       </figure>
       <input type="checkbox" id="botonMovil" class="botonMovil" />
       <label for="botonMovil" class="labelMovil"><span></span></label>
       <nav class="botoneraMovil">
         <ul>
-          <li><a href="#">Modo Nocturno</a></li>
+          <li id="modoNocturno"><a href="#">Modo Nocturno</a></li>
           <li id="misGifosFavoritos"><a href="#favoritos">Favoritos</a></li>
           <li id="misGifos"><a href="#mis-gifos">Mis GIFOS</a></li>
-          <img
-            class="crearGifos"
-            id="crearGifos"
-            src="assets/img/button-crear-gifo.svg"
-            alt="Crear gifos"
-          />
+          <li class="imgCrearGifos">
+            <img
+              class="crearGifos"
+              id="crearGifos"
+              src="assets/img/button-crear-gifo.svg"
+              alt="Crear gifos"
+            />
+          </li>
         </ul>
       </nav>
     </header>
@@ -87,7 +90,7 @@
         <h2 id="titleCategorySearch"></h2>
         <div class="contentResultsGifos"></div>
       </div>
-      <button class="verMasGifos" id="verMasGifs">VER MAS...</button>
+      <button class="button-ver-mas verMasGifos" id="verMasGifs">VER MAS...</button>
     </section>
 
     <section class="misGifosFavoritos">
@@ -97,27 +100,45 @@
         class="containerMisGifosFavoritos"
         id="containerMisGifosFavoritos"
       ></div>
-      <button class="verMasGifosFavoritos" id="verMasGifsFavoritos">
+      <button class="button-ver-mas verMasGifosFavoritos" id="verMasGifsFavoritos">
         VER MAS...
       </button>
+      <div id="notFoundFavorites" class="notFoundFavorites">
+        <img
+          src="assets/img/icon-fav-sin-contenido.svg"
+          alt="Not Found Favorites"
+        />
+        <p>"¡Guarda tu primer GIFO en Favoritos para que se muestre aquí!"</p>
+      </div>
     </section>
 
-    <section class="trendingGifos">
+    <section class="misGifos">
+      <img src="assets/img/icon-mis-gifos.svg" alt="Mis Gifos" />
+      <h2 class="titleMisGifos">Mis Gifos</h2>
+      <div class="containerMisGifos" id="containerMisGifos"></div>
+      <button class="button-ver-mas verMasMisGifos" id="verMasMisGifs">VER MAS...</button>
+      <div id="notFoundMisGifos" class="notFoundMisGifos">
+        <img src="assets/img/icon-mis-gifos-sin-contenido.svg" alt="" />
+        <p>¡Animate a crear tu primer GIFO!</p>
+      </div>
+    </section>
+
+    <section id="trendingGifos" class="trendingGifos">
       <h2>Trending GIFOS</h2>
       <div>
-        <p>Mira los últimos</p>
-        <p class="pGifos">GIFOS de nuestra comunidad.</p>
+        <p>Mira los últimos </p>
+        <p class="pGifos"> GIFOS de nuestra comunidad.</p>
       </div>
     </section>
 
     <section class="containerImgGifos">
       <img
-        class="buttonSliderLeft"
+        class="buttonSliderLeft retrocederSliderTrending"
         src="assets/img/button-slider-left.svg"
         alt="Button Left"
       />
       <img
-        class="buttonSliderRight"
+        class="buttonSliderRight avanzarSliderTrending"
         src="assets/img/Button-Slider-right.svg"
         alt="Button Rights"
       />
@@ -127,9 +148,31 @@
       <div class="containerIconsRedes">
         <p>Compartir en:</p>
         <div>
-          <img src="assets/img/icon_facebook.svg" alt="Facebook" />
-          <img src="assets/img/icon-twitter.svg" alt="Twitter" />
-          <img src="assets/img/icon_instagram.svg" alt="Facebook" />
+          <a href="https://www.facebook.com">
+            <img
+              class="facebook"
+              src="assets/img/icon_facebook.svg"
+              onmouseover="this.src='assets/img/icon_facebook_hover.svg'"
+              onmouseout="this.src='assets/img/icon_facebook.svg'"
+              alt="Facebook"
+          /></a>
+          <a href="https://www.twitter.com">
+            <img
+              class="twitter"
+              src="assets/img/icon-twitter.svg"
+              onmouseover="this.src='assets/img/icon-twitter-hover.svg'"
+              onmouseout="this.src='assets/img/icon-twitter.svg'"
+              alt="Twitter"
+            />
+          </a>
+          <a href="https://www.instagram.com"
+            ><img
+              class="instagram"
+              src="assets/img/icon_instagram.svg"
+              onmouseover="this.src='assets/img/icon_instagram-hover.svg'"
+              onmouseout="this.src='assets/img/icon_instagram.svg'"
+              alt="Instagram"
+          /></a>
         </div>
       </div>
       <p class="footerGifosAll">@ GIFOS 2020 All Rights Reserved.</p>
