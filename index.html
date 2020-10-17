@@ -20,12 +20,12 @@
           ><img src="assets/img/close.svg" alt="Close Modal"
         /></a>
         <img
-          class="buttonSliderLeft"
+          class="buttonSliderLeft white-mode-slider-left"
           src="assets/img/button-slider-left.svg"
           alt="Button Left"
         />
         <img
-          class="buttonSliderRight"
+          class="buttonSliderRight white-mode-slider-right"
           src="assets/img/Button-Slider-right.svg"
           alt="Button Rights"
         />
@@ -40,9 +40,9 @@
       <label for="botonMovil" class="labelMovil"><span></span></label>
       <nav class="botoneraMovil">
         <ul>
-          <li id="modoNocturno"><a href="#">Modo Nocturno</a></li>
-          <li id="misGifosFavoritos"><a href="#favoritos">Favoritos</a></li>
-          <li id="misGifos"><a href="#mis-gifos">Mis GIFOS</a></li>
+          <li id="modoNocturno"><a class="text-white-mode" href="#">Modo Nocturno</a></li>
+          <li id="misGifosFavoritos"><a class="text-white-mode" href="#favoritos">Favoritos</a></li>
+          <li id="misGifos"><a class="text-white-mode" href="#mis-gifos">Mis GIFOS</a></li>
           <li class="imgCrearGifos">
             <img
               class="crearGifos"
@@ -56,7 +56,7 @@
     </header>
 
     <section class="sectionBuscador">
-      <h1 class="titleBuscador">
+      <h1 class="titleBuscador text-white-mode">
         Inspírate, busca, guarda, y crea <br />
         los mejores <s>GIFOS</s>
       </h1>
@@ -66,6 +66,7 @@
       <div>
         <input
           id="inputSearch"
+          class="input-white-mode"
           type="text"
           placeholder="Busca GIFOS y más"
           autocomplete="off"
@@ -80,27 +81,27 @@
             alt="Close"
         /></span>
       </div>
-      <p class="trending">Trending:</p>
+      <p class="trending text-white-mode">Trending:</p>
       <div class="containerTrendingP">
-        <p class="reactions">Reactions, Entertainment,</p>
-        <p class="reactions">Sports, Stickers, Artists</p>
+        <p class="reactions text-white-mode">Reactions, Entertainment,</p>
+        <p class="reactions text-white-mode">Sports, Stickers, Artists</p>
       </div>
       <div class="resultsGifos" id="resultsGifos">
         <hr />
-        <h2 id="titleCategorySearch"></h2>
+        <h2 id="titleCategorySearch" class="text-white-mode"></h2>
         <div class="contentResultsGifos"></div>
       </div>
-      <button class="button-ver-mas verMasGifos" id="verMasGifs">VER MAS...</button>
+      <button class="button-ver-mas verMasGifos white-ver-mas" id="verMasGifs">VER MAS...</button>
     </section>
 
     <section class="misGifosFavoritos">
       <img src="assets/img/icon-favoritos.svg" alt="Favoritos" />
-      <h2 class="trendingGifos">Favoritos</h2>
+      <h2 class="trendingGifos text-white-mode">Favoritos</h2>
       <div
         class="containerMisGifosFavoritos"
         id="containerMisGifosFavoritos"
       ></div>
-      <button class="button-ver-mas verMasGifosFavoritos" id="verMasGifsFavoritos">
+      <button class="button-ver-mas verMasGifosFavoritos white-ver-mas" id="verMasGifsFavoritos">
         VER MAS...
       </button>
       <div id="notFoundFavorites" class="notFoundFavorites">
@@ -114,31 +115,31 @@
 
     <section class="misGifos">
       <img src="assets/img/icon-mis-gifos.svg" alt="Mis Gifos" />
-      <h2 class="titleMisGifos">Mis Gifos</h2>
+      <h2 class="titleMisGifos text-white-mode">Mis Gifos</h2>
       <div class="containerMisGifos" id="containerMisGifos"></div>
-      <button class="button-ver-mas verMasMisGifos" id="verMasMisGifs">VER MAS...</button>
+      <button class="button-ver-mas verMasMisGifos white-ver-mas" id="verMasMisGifs">VER MAS...</button>
       <div id="notFoundMisGifos" class="notFoundMisGifos">
         <img src="assets/img/icon-mis-gifos-sin-contenido.svg" alt="" />
         <p>¡Animate a crear tu primer GIFO!</p>
       </div>
     </section>
 
-    <section id="trendingGifos" class="trendingGifos">
-      <h2>Trending GIFOS</h2>
+    <section id="trendingGifos" class="trendingGifos trending-gifos-white">
+      <h2 class="text-white-mode">Trending GIFOS</h2>
       <div>
         <p>Mira los últimos </p>
         <p class="pGifos"> GIFOS de nuestra comunidad.</p>
       </div>
     </section>
 
-    <section class="containerImgGifos">
+    <section class="containerImgGifos trending-gifos-white">
       <img
-        class="buttonSliderLeft retrocederSliderTrending"
+        class="buttonSliderLeft retrocederSliderTrending white-mode-slider-left"
         src="assets/img/button-slider-left.svg"
         alt="Button Left"
       />
       <img
-        class="buttonSliderRight avanzarSliderTrending"
+        class="buttonSliderRight avanzarSliderTrending white-mode-slider-right"
         src="assets/img/Button-Slider-right.svg"
         alt="Button Rights"
       />

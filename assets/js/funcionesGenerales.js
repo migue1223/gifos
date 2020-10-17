@@ -26,9 +26,9 @@ function renderGifo(list, container, classSlider) {
     spanIcons.appendChild(downloadIcon);
     spanIcons.appendChild(expandIcon);
     h2User.innerText = item.username;
-    h2User.classList = "h2-title-search";
+    h2User.classList = "text-white-mode";
     h3Title.innerText = item.title;
-    h3Title.classList = "h3-title-search";
+    h3Title.classList = "text-white-mode";
     figure.appendChild(image);
     figure.appendChild(spanIcons);
     figure.appendChild(h2User);

@@ -137,10 +137,13 @@ body {
   font-family: "Montserrat";
   font-size: 13px;
   font-weight: bold;
-  color: #572ee5;
   letter-spacing: 0;
   text-align: center;
   text-transform: uppercase;
+}
+
+.text-white-mode {
+  color: #572ee5;
 }
 
 /* section buscador */
@@ -165,7 +168,6 @@ body {
   font-family: "Montserrat";
   font-size: 35px;
   font-weight: bold;
-  color: #572ee5;
   text-align: center;
   line-height: 50px;
   margin-bottom: 31px;
@@ -177,8 +179,6 @@ body {
 .sectionBuscador input {
   width: 551px;
   height: 50px;
-  background: #ffffff;
-  border: 1px solid #572ee5;
   border-radius: 27px;
   border-radius: 27px;
   text-align: center;
@@ -186,9 +186,15 @@ body {
   outline: none;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
-  color: #000000;
-  text-align: center;
+ 
 }
+
+.input-white-mode {
+  background: #ffffff;
+  border: 1px solid #572ee5;
+  color: #000000;
+}
+
 .sectionBuscador span {
   position: absolute;
   margin-left: -3%;
@@ -202,7 +208,6 @@ body {
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
   font-weight: bold;
-  color: #572ee5;
   text-align: center;
   line-height: 25px;
 }
@@ -211,7 +216,6 @@ body {
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
   font-weight: 500;
-  color: #572ee5;
   text-align: center;
   line-height: 25px;
 }
@@ -247,7 +251,6 @@ body {
   font-family: "Montserrat";
   font-size: 35px;
   font-weight: bold;
-  color: #572ee5;
   text-align: center;
   line-height: 40px;
 }
@@ -311,10 +314,8 @@ body {
   font-family: "Montserrat";
   font-size: 25px;
   font-weight: bold;
-  color: #572ee5;
   text-align: center;
   line-height: 30px;
-  background-color: white;
   margin-top: 8px;
   margin-bottom: 36px;
 }
@@ -370,21 +371,28 @@ body {
   display: none;
 }
 .verMasGifosFavoritos,
-.verMasMisGifos {
+.verMasMisGifos, .verMasGifos {
   width: 127px;
   height: 50px;
-  border: 1px solid #572ee5;
   border-radius: 25px;
   border-radius: 25px;
-  background-color: #fff;
-  color: #572ee5;
   font-weight: bold;
   outline: none;
   margin-top: 78px;
   margin-bottom: 78px;
+  background-color: #fff;
 }
 
-.verMasGifosFavoritos:hover {
+.verMasGifos {
+  display: none;
+}
+
+.white-ver-mas {
+  border: 1px solid #572ee5;
+  color: #572ee5;
+}
+
+.white-ver-mas:hover {
   cursor: pointer;
   background-color: #572ee5;
   color: #fff;
@@ -493,15 +501,17 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f4f5f9;
   border: 0px black;
+}
+
+.trending-gifos-white {
+  background-color: #f4f5f9;
 }
 .trendingGifos h2 {
   margin-top: 51px;
   font-family: 'Montserrat';
   font-size: 25px;
   font-weight: bold;
-  color: #572ee5;
   text-align: center;
   line-height: 30px;
   margin-bottom: 13px;
@@ -526,7 +536,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f4f5f9;
   border: 0px black;
 }
 
@@ -585,30 +594,10 @@ body {
   background-size: cover;
 }
 
-.verMasGifos {
-  width: 127px;
-  height: 50px;
-  border: 1px solid #572ee5;
-  border-radius: 25px;
-  border-radius: 25px;
-  background-color: #fff;
-  color: #572ee5;
-  font-weight: bold;
-  outline: none;
-  margin-top: 78px;
-  margin-bottom: 58px;
-  display: none;
-}
-.verMasGifos:hover {
-  cursor: pointer;
-  background-color: #572ee5;
-  color: #fff;
-}
-
 .buttonSliderLeft {
   margin-top: -5%;
 }
-.buttonSliderLeft:hover {
+.white-mode-slider-left:hover {
   cursor: pointer;
   background-image: url(../img/button-slider-left-hover.svg);
 }
@@ -616,7 +605,7 @@ body {
   order: 3;
   margin-top: -5%;
 }
-.buttonSliderRight:hover {
+.white-mode-slider-right:hover {
   cursor: pointer;
   background-image: url(../img/Button-Slider-right-hover.svg);
 }
@@ -677,6 +666,9 @@ body {
   color: #000000;
   text-align: left;
 }
+
+.text-white-mode {}
+
 .modalDialog > div span {
   display: flex;
   justify-content: flex-end;
@@ -744,20 +736,13 @@ body {
 .verMasMisGifos {
   display: none;
 }
-.verMasMisGifos:hover {
-  cursor: pointer;
-  background-color: #572ee5;
-  color: #fff;
-}
 
 .titleMisGifos {
   font-family: "Montserrat";
   font-size: 25px;
   font-weight: bold;
-  color: #572ee5;
   text-align: center;
   line-height: 30px;
-  background-color: white;
   margin-top: 8px;
   margin-bottom: 36px;
 }
@@ -893,7 +878,6 @@ body {
     display: flex;
     justify-content: flex-start;
     overflow: auto;
-    background-color: #f4f5f9;
   }
   .containerImgGifos figure {
     width: 243px;
@@ -1001,7 +985,6 @@ body {
     font-family: "Montserrat", sans-serif;
     font-size: 15px;
     font-weight: bold;
-    color: #ffffff;
     text-align: center;
     line-height: 60px;
     text-transform: initial;
@@ -1045,7 +1028,6 @@ body {
     height: 99px;
     font-family: "Montserrat", sans-serif;
     font-size: 25px;
-    color: #572ee5;
     text-align: center;
     line-height: 33px;
     margin-bottom: 31px;
@@ -1056,17 +1038,6 @@ body {
   .sectionBuscador input {
     width: 334px;
     height: 50px;
-    background: #ffffff;
-    border: 1px solid #572ee5;
-    border-radius: 27px;
-    border-radius: 27px;
-    text-align: center;
-    margin-bottom: 31px;
-    outline: none;
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    color: #000000;
-    text-align: center;
   }
   .sectionBuscador span {
     position: absolute;

@@ -3,38 +3,39 @@
   color: white !important;
 }
 
-.container-dark-mode {
-  background-color: #222326 !important;
+.trending-gifos-dark {
+  background-color: #222326;
 }
 
 .text-dark-mode {
-  color: white !important;
-  background-color: none !important;
+  color: white;
 }
 
 .input-dark-mode {
-  background: #37383c !important;
-  color: #ffffff !important;
-  border: 1px solid #ffffff !important;
+  background: #37383c;
+  color: #ffffff;
+  border: 1px solid #ffffff;
 }
 
-.hover-button-dark-mode {
-  color: black !important;
-  border: 1px solid white !important;
+.dark-ver-mas {
+  color: black;
+  border: 1px solid white;
 }
 
-.hover-button-dark-mode:hover {
-  background-color: black !important;
-  color: white !important;
+.dark-ver-mas:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
 }
 
 .hover-slider-left:hover {
-  background: #ffffff !important;
-  color: black !important;
+  cursor: pointer;
+  background: #ffffff;
 }
 
 .hover-slider-right:hover {
-  background: #ffffff !important;
+  cursor: pointer;
+  background: #ffffff;
 }
 
 .h2-title-search-dark-mode {

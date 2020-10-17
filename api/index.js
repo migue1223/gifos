@@ -3,6 +3,7 @@
 import API_KEY from "../config/index.js";
 
 class apiGipgy {
+  
   constructor() {
     // endpoints apiGipgy
     this.API_KEY = API_KEY.API_KEY;
