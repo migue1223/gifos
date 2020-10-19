@@ -14,7 +14,6 @@ const containerModal = document.getElementById("containerOpenModal");
 // crear el gifo
 function renderGifo(list, container, classSlider) {
   list.forEach(async (item) => {
-
     const figure = document.createElement("figure");
     const image = document.createElement("img");
     image.classList = "loaderGifos";
@@ -208,14 +207,22 @@ async function createModalClick() {
     buttonSliderLeft.style.visibility = "visible";
     buttonSliderRight.style.visibility = "visible";
   }
-  removeClassLoader()
+  removeClassLoader();
 }
 
 function renderListTrendings(list) {
   const container = document.querySelector(".containerTrendingP");
+  const p = container.querySelectorAll("p");
+  if (p.length > 0) {
+    p.forEach((item) => item.parentElement.removeChild(item));
+  }
   list.forEach((item) => {
     const p = document.createElement("p");
     p.classList = "reactions text-white-mode";
+    if (localStorage.getItem("mode-dark") === "black") {
+      p.classList.remove("text-white-mode");
+      p.classList.add("text-dark-mode");
+    }
     p.innerText = `${item},`;
     p.addEventListener("click", clickListTrending);
     container.appendChild(p);

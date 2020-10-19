@@ -37,12 +37,20 @@
         <img src="assets/img/logo-desktop.svg" alt="Logo" />
       </figure>
       <input type="checkbox" id="botonMovil" class="botonMovil" />
-      <label for="botonMovil" class="labelMovil"><span></span></label>
-      <nav class="botoneraMovil">
+      <label for="botonMovil" class="labelMovil"
+        ><span class="icons-bars-times"><i class="fas fa-bars text-white-mode"></i><i class="fas fa-times text-white-mode"></i></span
+      ></label>
+      <nav class="botoneraMovil nav-white-mode">
         <ul>
-          <li id="modoNocturno"><a class="text-white-mode" href="#">Modo Nocturno</a></li>
-          <li id="misGifosFavoritos"><a class="text-white-mode" href="#favoritos">Favoritos</a></li>
-          <li id="misGifos"><a class="text-white-mode" href="#mis-gifos">Mis GIFOS</a></li>
+          <li id="modoNocturno">
+            <a class="text-white-mode" href="#">Modo Nocturno</a>
+          </li>
+          <li id="misGifosFavoritos">
+            <a class="text-white-mode" href="#favoritos">Favoritos</a>
+          </li>
+          <li id="misGifos">
+            <a class="text-white-mode" href="#mis-gifos">Mis GIFOS</a>
+          </li>
           <li class="imgCrearGifos">
             <img
               class="crearGifos"
@@ -82,14 +90,15 @@
         /></span>
       </div>
       <p class="trending text-white-mode">Trending:</p>
-      <div class="containerTrendingP">
-      </div>
+      <div class="containerTrendingP"></div>
       <div class="resultsGifos" id="resultsGifos">
         <hr />
         <h2 id="titleCategorySearch" class="text-white-mode"></h2>
         <div class="contentResultsGifos"></div>
       </div>
-      <button class="button-ver-mas verMasGifos white-ver-mas" id="verMasGifs">VER MAS...</button>
+      <button class="button-ver-mas verMasGifos white-ver-mas" id="verMasGifs">
+        VER MAS...
+      </button>
     </section>
 
     <section class="misGifosFavoritos">
@@ -99,7 +108,10 @@
         class="containerMisGifosFavoritos"
         id="containerMisGifosFavoritos"
       ></div>
-      <button class="button-ver-mas verMasGifosFavoritos white-ver-mas" id="verMasGifsFavoritos">
+      <button
+        class="button-ver-mas verMasGifosFavoritos white-ver-mas"
+        id="verMasGifsFavoritos"
+      >
         VER MAS...
       </button>
       <div id="notFoundFavorites" class="notFoundFavorites">
@@ -115,7 +127,12 @@
       <img src="assets/img/icon-mis-gifos.svg" alt="Mis Gifos" />
       <h2 class="titleMisGifos text-white-mode">Mis Gifos</h2>
       <div class="containerMisGifos" id="containerMisGifos"></div>
-      <button class="button-ver-mas verMasMisGifos white-ver-mas" id="verMasMisGifs">VER MAS...</button>
+      <button
+        class="button-ver-mas verMasMisGifos white-ver-mas"
+        id="verMasMisGifs"
+      >
+        VER MAS...
+      </button>
       <div id="notFoundMisGifos" class="notFoundMisGifos">
         <img src="assets/img/icon-mis-gifos-sin-contenido.svg" alt="" />
         <p>¡Animate a crear tu primer GIFO!</p>
@@ -125,8 +142,8 @@
     <section id="trendingGifos" class="trendingGifos trending-gifos-white">
       <h2 class="text-white-mode">Trending GIFOS</h2>
       <div>
-        <p class="p-dark-mode">Mira los últimos </p>
-        <p class="pGifos p-dark-mode"> GIFOS de nuestra comunidad.</p>
+        <p class="p-dark-mode">Mira los últimos</p>
+        <p class="pGifos p-dark-mode">GIFOS de nuestra comunidad.</p>
       </div>
     </section>
 
@@ -174,7 +191,9 @@
           /></a>
         </div>
       </div>
-      <p class="footerGifosAll p-dark-mode">@ GIFOS 2020 All Rights Reserved.</p>
+      <p class="footerGifosAll p-dark-mode">
+        @ GIFOS 2020 All Rights Reserved.
+      </p>
     </footer>
 
     <script type="module" src="api/index.js"></script>

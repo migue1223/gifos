@@ -53,6 +53,10 @@ const imgSliderRight = body.querySelectorAll(".buttonSliderRight");
 const buttonsVerMas = body.querySelectorAll(".button-ver-mas");
 const p = body.querySelectorAll(".p-dark-mode");
 const modalGifos = document.getElementById("openModal");
+const navMovil = document.querySelector(".botoneraMovil");
+const buttonNavMovil = document.querySelector(".icons-bars-times");
+const buttonFabars = document.querySelector(".fa-bars");
+const buttonFatimes = document.querySelector(".fa-times");
 
 let dataSearchs = [];
 let resSlider = [];
@@ -89,6 +93,9 @@ titleModoNocturno.addEventListener("click", () => {
     inputSearch.classList.remove("input-white-mode");
     containerModal.classList.add("modal-dark-mode");
     containerModal.classList.remove("modal-white-mode");
+    navMovil.classList.remove("nav-white-mode");
+    navMovil.classList.add("modal-dark-mode");
+    navMovil.style.opacity = "1";
 
     imgSliderLeft.forEach((item) => {
       item.src = "assets/img/button-slider-left-md-noct.svg";
@@ -134,6 +141,9 @@ titleModoNocturno.addEventListener("click", () => {
     inputSearch.classList.add("input-white-mode");
     containerModal.classList.remove("modal-dark-mode");
     containerModal.classList.add("modal-white-mode");
+    navMovil.classList.add("nav-white-mode");
+    navMovil.classList.remove("modal-dark-mode");
+    navMovil.style.opacity = "0.9";
 
     imgSliderLeft.forEach((item) => {
       item.src = "assets/img/button-slider-left.svg";
@@ -165,6 +175,9 @@ titleModoNocturno.addEventListener("click", () => {
     });
   }
 });
+
+//click en button nav movil
+buttonNavMovil.addEventListener("click", () => {});
 
 // click input search & iconClose
 inputSearch.addEventListener("click", () => {
@@ -320,6 +333,7 @@ imageHeader.addEventListener("click", () => {
   imgs.forEach((item) => item.parentNode.removeChild(item));
 
   getLastGifs();
+  listTrendingSearch();
 });
 
 // funciones
@@ -557,7 +571,6 @@ function showListSuggestions(e) {
 // remover class despues de cargar el gif y validar si hay favoritos
 function removeClassLoader() {
   const imgs = document.querySelectorAll(".loaderGifos");
-  console.log(imgs);
   imgs.forEach((item) => {
     setTimeout(() => {
       item.removeAttribute("class");
