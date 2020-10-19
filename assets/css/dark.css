@@ -1,6 +1,6 @@
 .dark-mode {
-  background-color: #37383c !important;
-  color: white !important;
+  background-color: #37383c;
+  color: white;
 }
 
 .trending-gifos-dark {
@@ -9,6 +9,10 @@
 
 .text-dark-mode {
   color: white;
+}
+
+.modal-dark-mode {
+  background: #37383c;
 }
 
 .input-dark-mode {
@@ -36,19 +40,4 @@
 .hover-slider-right:hover {
   cursor: pointer;
   background: #ffffff;
-}
-
-.h2-title-search-dark-mode {
-  font-family: "Roboto" !important;
-  font-size: 15px !important;
-  text-align: left !important;
-  color: #ffffff !important;
-}
-
-.h3-title-search-dark-mode {
-  font-family: 'Roboto' !important;
-  font-size: 16px !important;
-  font-weight: bold !important;
-  text-align: left !important;
-  color: #ffffff !important;
 }

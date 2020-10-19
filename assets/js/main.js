@@ -5,6 +5,7 @@ import {
   renderSpanIconFavorite,
   renderGifo,
   renderRemoveIconFavorite,
+  renderListTrendings,
 } from "./funcionesGenerales.js";
 
 const containerGifos = document.querySelector(".containerImgGifos"); //resultados de gifos slide
@@ -22,6 +23,7 @@ const containerBuscador = document.querySelector(".sectionBuscador");
 const containerModal = document.getElementById("containerOpenModal");
 const containerNotFoundFavorites = document.getElementById("notFoundFavorites");
 const containerNotFoundMisGifos = document.getElementById("notFoundMisGifos");
+const containerTrendingP = document.querySelector(".containerTrendingP");
 
 const inputSearch = document.getElementById("inputSearch");
 const imageBuscador = document.querySelector(".imageBuscador");
@@ -49,6 +51,8 @@ const texts = body.querySelectorAll("h1, h2, h3, p, li a");
 const imgSliderLeft = body.querySelectorAll(".buttonSliderLeft");
 const imgSliderRight = body.querySelectorAll(".buttonSliderRight");
 const buttonsVerMas = body.querySelectorAll(".button-ver-mas");
+const p = body.querySelectorAll(".p-dark-mode");
+const modalGifos = document.getElementById("openModal");
 
 let dataSearchs = [];
 let resSlider = [];
@@ -66,7 +70,7 @@ titleModoNocturno.addEventListener("click", () => {
   containerGifos.classList.toggle("container-dark-mode");
   titleMisGifo.classList.toggle("dark-mode");
   titleFavorites.classList.toggle("dark-mode");
-  containerModal.classList.toggle("dark-mode");
+  const pListTrendings = containerTrendingP.querySelectorAll("p");
 
   const a = titleModoNocturno.querySelector("a");
 
@@ -83,6 +87,8 @@ titleModoNocturno.addEventListener("click", () => {
     containerGifos.classList.remove("trending-gifos-white");
     inputSearch.classList.add("input-dark-mode");
     inputSearch.classList.remove("input-white-mode");
+    containerModal.classList.add("modal-dark-mode");
+    containerModal.classList.remove("modal-white-mode");
 
     imgSliderLeft.forEach((item) => {
       item.src = "assets/img/button-slider-left-md-noct.svg";
@@ -104,6 +110,15 @@ titleModoNocturno.addEventListener("click", () => {
       item.classList.add("text-dark-mode");
       item.classList.remove("text-white-mode");
     });
+    p.forEach((item) => {
+      item.classList.add("text-dark-mode");
+      item.classList.remove("p-dark-mode");
+    });
+
+    pListTrendings.forEach((item) => {
+      item.classList.add("text-dark-mode");
+      item.classList.remove("text-white-mode");
+    });
   } else {
     a.innerHTML = "Modo Nocturno";
     imgLogo.src = "assets/img/logo-desktop.svg";
@@ -117,6 +132,8 @@ titleModoNocturno.addEventListener("click", () => {
     containerGifos.classList.add("trending-gifos-white");
     inputSearch.classList.remove("input-dark-mode");
     inputSearch.classList.add("input-white-mode");
+    containerModal.classList.remove("modal-dark-mode");
+    containerModal.classList.add("modal-white-mode");
 
     imgSliderLeft.forEach((item) => {
       item.src = "assets/img/button-slider-left.svg";
@@ -134,6 +151,15 @@ titleModoNocturno.addEventListener("click", () => {
       item.classList.add("white-ver-mas");
     });
     texts.forEach((item) => {
+      item.classList.remove("text-dark-mode");
+      item.classList.add("text-white-mode");
+    });
+    p.forEach((item) => {
+      item.classList.remove("text-dark-mode");
+      item.classList.add("p-dark-mode");
+    });
+
+    pListTrendings.forEach((item) => {
       item.classList.remove("text-dark-mode");
       item.classList.add("text-white-mode");
     });
@@ -163,6 +189,7 @@ inputSearch.addEventListener("keyup", (e) => {
     removeUlSearch();
   } else {
     getSuggestionsSearh(valueInput);
+    removeClassLoader();
   }
   if (valueInput === "") {
     removeUlSearch();
@@ -181,6 +208,8 @@ seeMoreButton.addEventListener("click", async () => {
     res.data.forEach((item) => dataSearchs.push(item));
 
     localStorage.setItem("listSearch", JSON.stringify(dataSearchs));
+
+    removeClassLoader();
   } catch (error) {
     console.error(error);
   }
@@ -192,7 +221,6 @@ closeModal.addEventListener("click", () => {
   const favoriteIcon = containerModal.querySelector(".validate-favorite");
   const classFavorite = containerModal.querySelector(".icon-add-favorite");
   const idGifo = favoriteIcon.getAttribute("data-id-gifo");
-  const modalGifos = document.getElementById("openModal");
 
   if (imgs.length > 0) {
     imgs.forEach((element) => {
@@ -208,11 +236,11 @@ closeModal.addEventListener("click", () => {
   );
 
   if (listContainerSlider.length > 0) {
-    renderSpanIconFavorite(listContainerSlider);
+    // renderSpanIconFavorite(listContainerSlider);
     renderRemoveIconFavorite(listContainerSlider, idGifo, classFavorite);
   }
   if (listContainerSearch.length > 0) {
-    renderSpanIconFavorite(listContainerSearch);
+    // renderSpanIconFavorite(listContainerSearch);
     renderRemoveIconFavorite(listContainerSlider, idGifo, classFavorite);
   }
 
@@ -249,6 +277,7 @@ titleMisGifos.addEventListener("click", () => {
     containerMisGifosFavoritos,
     "favoritesSlider"
   );
+  removeClassLoader();
 });
 
 // click button ver mas favoritos
@@ -263,6 +292,7 @@ seeMoreButtonFavorite.addEventListener("click", async () => {
       containerMisGifosFavoritos,
       "favoritesSlider"
     );
+    removeClassLoader();
   } catch (error) {
     console.error(error);
   }
@@ -394,6 +424,7 @@ async function avanzarSlider() {
 
   buttonSliderLeft.style.visibility = "visible";
   buttonSliderRight.style.visibility = "visible";
+  removeClassLoader();
 }
 
 async function retrocederSlider() {
@@ -481,6 +512,7 @@ async function retrocederSlider() {
 
   buttonSliderLeft.style.visibility = "visible";
   buttonSliderRight.style.visibility = "visible";
+  removeClassLoader();
 }
 
 // remover las sugerencias de busqueda
@@ -525,26 +557,11 @@ function showListSuggestions(e) {
 // remover class despues de cargar el gif y validar si hay favoritos
 function removeClassLoader() {
   const imgs = document.querySelectorAll(".loaderGifos");
-  const h2Modal = document.querySelector(".h2-title-search");
-  const h3Modal = document.querySelector(".h3-title-search");
-
-  const listContainer = document.querySelectorAll(".icon-favorite-hover");
+  console.log(imgs);
   imgs.forEach((item) => {
-    if (item.complete) {
+    setTimeout(() => {
       item.removeAttribute("class");
-      renderSpanIconFavorite(listContainer);
-      if (localStorage.getItem("mode-dark") === "black") {
-        h2Modal.classList.add("h2-title-search-dark-mode");
-        h2Modal.classList.remove("h2-title-search");
-        h3Modal.classList.add("h2-title-search-dark-mode");
-        h3Modal.classList.remove("h2-title-search");
-      } else {
-        h2Modal.classList.remove("h2-title-search-dark-mode");
-        h2Modal.classList.add("h2-title-search");
-        h3Modal.classList.remove("h2-title-search-dark-mode");
-        h3Modal.classList.add("h2-title-search");
-      }
-    }
+    }, 5000);
   });
 }
 
@@ -569,6 +586,7 @@ moveSlider.addEventListener("click", () => {
       "trendingSlider"
     );
   }
+  removeClassLoader();
 });
 
 // click en retroceder slider
@@ -594,6 +612,7 @@ backSlider.addEventListener("click", () => {
       "trendingSlider"
     );
   }
+  removeClassLoader();
 });
 
 function validateIndiceSlider() {
@@ -627,6 +646,17 @@ function validateIndiceSlider() {
   });
 }
 
+//cuando se hace click en la lista de trending
+function clickListTrending() {
+  const keywords = this.innerHTML;
+  const imgs = containerSearchResultsGifos.querySelectorAll("figure") || [];
+  if (imgs.length > 0) {
+    imgs.forEach((item) => item.parentNode.removeChild(item));
+  }
+  getResultsTags(keywords);
+  removeClassLoader();
+}
+
 // obtener los resultados al elegir la busqueda
 async function getResultsTags(keywords) {
   dataSearchs = [];
@@ -643,6 +673,7 @@ async function getResultsTags(keywords) {
     showTitleImageSearch();
     renderGifo(res.data, containerSearchResultsGifos, "searchSlider");
     seeMoreButton.style.display = "block";
+    removeClassLoader();
   } catch (error) {
     console.error(error);
   }
@@ -671,8 +702,8 @@ async function getSuggestionsSearh(keywords) {
 // obtener ultimos gifs en inicio
 async function getLastGifs() {
   try {
-    let results = await apiGiphy.getTrendingGifs("", 0);
-    let res = await results.json();
+    const results = await apiGiphy.getTrendingGifs("", 0);
+    const res = await results.json();
     localStorage.setItem("listTrending", JSON.stringify(res.data));
     if (window.matchMedia("(max-width: 1024px)").matches) {
       renderGifo(
@@ -687,11 +718,31 @@ async function getLastGifs() {
         "trendingSlider"
       );
     }
+    removeClassLoader();
   } catch (error) {
     console.error(error);
   }
 }
 
-getLastGifs();
+//obtener lista de gifs populares
+async function listTrendingSearch() {
+  const results = await apiGiphy.getListTrendingSearch();
+  const res = await results.json();
+  let list = [];
+  for (let i = 0; i < 5; i++) {
+    const aleatorioList = Math.floor(Math.random() * res.data.length);
+    list.push(res.data[aleatorioList]);
+  }
+  renderListTrendings(list);
+}
 
-export { removeClassLoader, avanzarSlider, retrocederSlider };
+getLastGifs();
+listTrendingSearch();
+
+export {
+  removeClassLoader,
+  avanzarSlider,
+  retrocederSlider,
+  getResultsTags,
+  clickListTrending,
+};

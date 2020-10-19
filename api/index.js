@@ -3,7 +3,6 @@
 import API_KEY from "../config/index.js";
 
 class apiGipgy {
-  
   constructor() {
     // endpoints apiGipgy
     this.API_KEY = API_KEY.API_KEY;
@@ -11,6 +10,8 @@ class apiGipgy {
     this.API_URL_TRENDING = "https://api.giphy.com/v1/gifs/trending?";
     this.API_URL_TAGS = "https://api.giphy.com/v1/gifs/search/tags?";
     this.API_URL_SEARCH_ID = "https://api.giphy.com/v1/gifs/";
+    this.API_URL_TRENDING_SEARCHES =
+      "https://api.giphy.com/v1/trending/searches?";
     this.localStorageFavorites =
       JSON.parse(localStorage.getItem("listFavorites")) || [];
     this.localStorageTrending =
@@ -54,6 +55,17 @@ class apiGipgy {
       return await fetch(
         `${this.API_URL_TRENDING}api_key=${this.API_KEY}&limit=${limit}&offset=${offset}&lang=es`,
         { cache: "force-cache" }
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  //list most popular trending
+  async getListTrendingSearch() {
+    try {
+      return await fetch(
+        `${this.API_URL_TRENDING_SEARCHES}api_key=${this.API_KEY}`
       );
     } catch (error) {
       console.error(error);

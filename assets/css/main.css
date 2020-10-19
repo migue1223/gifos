@@ -186,7 +186,6 @@ body {
   outline: none;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
- 
 }
 
 .input-white-mode {
@@ -202,6 +201,16 @@ body {
 }
 .containerTrendingP {
   display: flex;
+}
+
+.containerTrendingP p {
+  text-transform: lowercase;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.containerTrendingP p::first-letter {
+  text-transform: uppercase;
 }
 
 .trending {
@@ -266,11 +275,13 @@ body {
   width: 260px;
   height: 200px;
   margin: 21px 21px;
+  border: none;
 }
 
 .contentResultsGifos figure img {
   width: 260px;
   height: 200px;
+  border: 0;
 }
 .contentResultsGifos figure span {
   display: none;
@@ -371,7 +382,8 @@ body {
   display: none;
 }
 .verMasGifosFavoritos,
-.verMasMisGifos, .verMasGifos {
+.verMasMisGifos,
+.verMasGifos {
   width: 127px;
   height: 50px;
   border-radius: 25px;
@@ -509,7 +521,7 @@ body {
 }
 .trendingGifos h2 {
   margin-top: 51px;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-size: 25px;
   font-weight: bold;
   text-align: center;
@@ -523,9 +535,11 @@ body {
 .trendingGifos p {
   font-family: "Roboto", sans-serif;
   font-size: 18px;
-  color: #000000;
   text-align: center;
   line-height: 23px;
+}
+.p-dark-mode {
+  color: #000000;
 }
 .pGifos {
   margin-bottom: 53px;
@@ -545,6 +559,7 @@ body {
   border: none;
   margin: 0 22px;
   margin-bottom: 82px;
+  border: 0;
 }
 
 .containerImgGifos figure h2 {
@@ -573,6 +588,7 @@ body {
 .containerImgGifos figure img {
   width: 100%;
   height: 100%;
+  border: 0;
 }
 
 .containerImgGifos span {
@@ -618,7 +634,6 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.8);
   z-index: 99999;
   display: none;
   -webkit-transition: opacity 400ms ease-in;
@@ -626,22 +641,26 @@ body {
   transition: opacity 400ms ease-in;
   pointer-events: auto;
 }
-.modalDialog > div {
+.containerOpenModal {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100vh;
   position: relative;
+}
+
+.modal-white-mode {
   background: #fff;
 }
-.modalDialog > div figure {
+
+.containerOpenModal figure {
   display: flex;
   flex-direction: column;
   width: 695px;
   height: 385px;
 }
-.modalDialog > div figure img {
+.containerOpenModal figure img {
   width: 100%;
   height: 100%;
 }
@@ -652,39 +671,39 @@ body {
   margin-left: 2%;
 }
 
-.modalDialog > div h2 {
+.containerOpenModal h2 {
   font-family: "Roboto";
   font-size: 15px;
-  color: #000000;
   text-align: left;
   margin-top: -5%;
 }
-.modalDialog > div h3 {
+.containerOpenModal h3 {
   font-family: "Roboto";
   font-size: 16px;
   font-weight: bold;
-  color: #000000;
   text-align: left;
 }
 
-.text-white-mode {}
+.text-white-mode-modal {
+  color: #000000;
+}
 
-.modalDialog > div span {
+.containerOpenModal span {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   margin-top: 2%;
   z-index: 1;
 }
-.modalDialog > div span img {
+.containerOpenModal span img {
   margin: 0 5px;
   width: 32px;
   height: 32px;
 }
-.modalDialog > div span .icon-default-expand {
+.containerOpenModal span .icon-default-expand {
   display: none;
 }
-.modalDialog > div span img:hover {
+.containerOpenModal span img:hover {
   cursor: pointer;
 }
 /* modal */
@@ -771,7 +790,6 @@ body {
 .footerGifosAll {
   font-family: "Roboto", sans-serif;
   font-size: 15px;
-  color: #000000;
   letter-spacing: 0;
   margin-right: 168px;
 }
@@ -889,6 +907,7 @@ body {
   .containerImgGifos figure img {
     width: 243px;
     height: 187px;
+    border: 0;
   }
   .containerImgGifos figure span {
     display: block;
@@ -908,7 +927,7 @@ body {
   .modalDialog {
     overflow: hidden;
   }
-  .modalDialog > div {
+  .containerOpenModal {
     overflow: hidden;
   }
   .contentResultsGifos figure span {
@@ -1079,6 +1098,7 @@ body {
   .contentResultsGifos figure img {
     width: 156px;
     height: 120px;
+    border: 0;
   }
 
   .resultsGifos h2 {
@@ -1112,7 +1132,7 @@ body {
   .ulContentSearch {
     width: 290px;
   }
-  .modalDialog > div figure {
+  .containerOpenModal figure {
     width: 500px;
   }
   .close {
@@ -1130,7 +1150,7 @@ body {
     margin-left: -10%;
     margin-top: 4%;
   }
-  .modalDialog > div figure {
+  .containerOpenModal figure {
     width: 280px;
   }
   .close {
@@ -1143,7 +1163,7 @@ body {
   .contentResultsGifos figure {
     margin: 10px 10px;
   }
-  .modalDialog > div figure {
+  .containerOpenModal figure {
     width: 250px;
   }
 }
@@ -1159,7 +1179,7 @@ body {
     width: 130px;
     margin: 5px 5px;
   }
-  .modalDialog > div figure {
+  .containerOpenModal figure {
     width: 240px;
   }
   .contentResultsGifos figure span {

@@ -1,7 +1,12 @@
 "use strict";
 
 import apiGiphy from "../../api/index.js";
-import { removeClassLoader, avanzarSlider, retrocederSlider } from "./main.js";
+import {
+  removeClassLoader,
+  avanzarSlider,
+  retrocederSlider,
+  clickListTrending,
+} from "./main.js";
 
 const modalGifos = document.getElementById("openModal");
 const containerModal = document.getElementById("containerOpenModal");
@@ -9,8 +14,13 @@ const containerModal = document.getElementById("containerOpenModal");
 // crear el gifo
 function renderGifo(list, container, classSlider) {
   list.forEach(async (item) => {
+
     const figure = document.createElement("figure");
     const image = document.createElement("img");
+    image.classList = "loaderGifos";
+    figure.appendChild(image);
+    container.appendChild(figure);
+
     const h2User = document.createElement("h2");
     const h3Title = document.createElement("h3");
     const spanIcons = document.createElement("span");
@@ -18,22 +28,24 @@ function renderGifo(list, container, classSlider) {
     const downloadIcon = await downloadIconGifo(item);
     const expandIcon = expandIconGifo(item, classSlider);
 
-    image.classList = "loaderGifos";
     image.src = item.images.original.url;
     image.alt = item.title;
-    image.onload = removeClassLoader;
     spanIcons.appendChild(favoriteIcon);
     spanIcons.appendChild(downloadIcon);
     spanIcons.appendChild(expandIcon);
     h2User.innerText = item.username;
-    h2User.classList = "text-white-mode";
     h3Title.innerText = item.title;
-    h3Title.classList = "text-white-mode";
-    figure.appendChild(image);
+    if (localStorage.getItem("mode-dark") === "black") {
+      h2User.classList = "text-dark-mode";
+      h3Title.classList = "text-dark-mode";
+    } else {
+      h2User.classList = "text-white-mode-modal";
+      h3Title.classList = "text-white-mode-modal";
+    }
+
     figure.appendChild(spanIcons);
     figure.appendChild(h2User);
     figure.appendChild(h3Title);
-    container.appendChild(figure);
   });
 }
 
@@ -57,6 +69,9 @@ async function downloadIconGifo(item) {
 function favoriteIconGifo(item, classSlider) {
   const favoriteIcon = document.createElement("img");
   favoriteIcon.setAttribute("data-id-gifo", item.id);
+  const validate = apiGiphy.localStorageFavorites.findIndex(
+    (e) => e.id === item.id
+  );
   favoriteIcon.setAttribute("data-title-gifo", item.title);
   favoriteIcon.setAttribute("data-username-gifo", item.username);
   favoriteIcon.setAttribute("data-url-gifo", item.images.original.url);
@@ -64,6 +79,14 @@ function favoriteIconGifo(item, classSlider) {
   favoriteIcon.classList =
     "icon-default-favorite icon-favorite-hover validate-favorite";
   favoriteIcon.addEventListener("click", addFavoriteGifo);
+
+  if (validate !== -1) {
+    favoriteIcon.classList.remove("icon-default-favorite");
+    favoriteIcon.classList.remove("icon-favorite-hover");
+    favoriteIcon.classList.add("icon-add-favorite");
+    favoriteIcon.removeEventListener("click", addFavoriteGifo);
+    favoriteIcon.addEventListener("click", removeFavoriteGifo);
+  }
   return favoriteIcon;
 }
 
@@ -157,7 +180,6 @@ function renderRemoveIconFavorite(container, idGifo, classIcon) {
 // crear modal gifo
 async function createModalClick() {
   modalGifos.style.display = "block";
-  let img;
   const buttonSliderLeft = document.querySelector(".buttonSliderLeft");
   const buttonSliderRight = document.querySelector(".buttonSliderRight");
   buttonSliderRight.addEventListener("click", avanzarSlider);
@@ -177,7 +199,6 @@ async function createModalClick() {
     renderGifo(validate, containerModal, classSlider);
     buttonSliderLeft.style.visibility = "visible";
     buttonSliderRight.style.visibility = "visible";
-    img = containerModal.querySelector("figure")
   } else {
     const resultId = await apiGiphy.getGifoId(idGifo);
     const res = await resultId.json();
@@ -186,9 +207,24 @@ async function createModalClick() {
     renderGifo(data, containerModal, classSlider);
     buttonSliderLeft.style.visibility = "visible";
     buttonSliderRight.style.visibility = "visible";
-    img = containerModal.querySelector("figure")
   }
-
+  removeClassLoader()
 }
 
-export { renderSpanIconFavorite, renderGifo, renderRemoveIconFavorite };
+function renderListTrendings(list) {
+  const container = document.querySelector(".containerTrendingP");
+  list.forEach((item) => {
+    const p = document.createElement("p");
+    p.classList = "reactions text-white-mode";
+    p.innerText = `${item},`;
+    p.addEventListener("click", clickListTrending);
+    container.appendChild(p);
+  });
+}
+
+export {
+  renderSpanIconFavorite,
+  renderGifo,
+  renderRemoveIconFavorite,
+  renderListTrendings,
+};
