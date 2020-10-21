@@ -9,6 +9,7 @@ class apiGipgy {
     this.API_URL_SEARCH = "https://api.giphy.com/v1/gifs/search?";
     this.API_URL_TRENDING = "https://api.giphy.com/v1/gifs/trending?";
     this.API_URL_TAGS = "https://api.giphy.com/v1/gifs/search/tags?";
+    this.API_URL_TAGS_RELATED = "https://api.giphy.com/v1/tags/related/"
     this.API_URL_SEARCH_ID = "https://api.giphy.com/v1/gifs/";
     this.API_URL_TRENDING_SEARCHES =
       "https://api.giphy.com/v1/trending/searches?";
@@ -41,11 +42,19 @@ class apiGipgy {
       return await fetch(
         `${this.API_URL_TAGS}q=${keywords.toLowerCase()}&api_key=${
           this.API_KEY
-        }&limit=5&lang=es`,
+        }&lang=es`,
         { cache: "force-cache" }
       );
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  async getSuggestionsListTags(keywords){
+    try {
+      return await fetch(`${this.API_URL_TAGS_RELATED}${keywords.toLowerCase()}?api_key=${this.API_KEY}&lang=es`)
+    } catch (error) {
+      console.error(error)
     }
   }
 

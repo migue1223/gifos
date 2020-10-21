@@ -29,6 +29,11 @@ function renderGifo(list, container, classSlider) {
 
     image.src = item.images.original.url;
     image.alt = item.title;
+    if (window.matchMedia("(max-width: 1024px)").matches) {
+      image.addEventListener("click", createModalClick);
+      image.setAttribute("data-id-gifo", item.id);
+      image.setAttribute("data-classSlider", classSlider);
+    }
     spanIcons.appendChild(favoriteIcon);
     spanIcons.appendChild(downloadIcon);
     spanIcons.appendChild(expandIcon);

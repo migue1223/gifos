@@ -30,7 +30,7 @@ const imageBuscador = document.querySelector(".imageBuscador");
 const closeModal = document.querySelector(".closeModal");
 const iconCloseModal = closeModal.querySelector("img");
 const titleBuscador = document.querySelector(".titleBuscador");
-const titleMisGifos = document.getElementById("misGifosFavoritos");
+const titleMisGifos = document.getElementById("liMisGifosFavoritos");
 const titleGifos = document.getElementById("misGifos");
 const titleMisGifo = document.querySelector(".titleMisGifos");
 const titleModoNocturno = document.getElementById("modoNocturno");
@@ -94,7 +94,9 @@ titleModoNocturno.addEventListener("click", () => {
     containerModal.classList.add("modal-dark-mode");
     containerModal.classList.remove("modal-white-mode");
     navMovil.classList.remove("nav-white-mode");
-    navMovil.classList.add("modal-dark-mode");
+    if (window.matchMedia("(max-width:767px)").matches) {
+      navMovil.classList.add("trending-gifos-dark");
+    }
     navMovil.style.opacity = "1";
 
     imgSliderLeft.forEach((item) => {
@@ -142,8 +144,10 @@ titleModoNocturno.addEventListener("click", () => {
     containerModal.classList.remove("modal-dark-mode");
     containerModal.classList.add("modal-white-mode");
     navMovil.classList.add("nav-white-mode");
-    navMovil.classList.remove("modal-dark-mode");
-    navMovil.style.opacity = "0.9";
+    if (window.matchMedia("max-width:767px")) {
+      navMovil.classList.remove("trending-gifos-dark");
+    }
+    // navMovil.style.opacity = "0.9";
 
     imgSliderLeft.forEach((item) => {
       item.src = "assets/img/button-slider-left.svg";
@@ -697,6 +701,7 @@ async function getSuggestionsSearh(keywords) {
   try {
     const results = await apiGiphy.getSuggestionsListCategory(keywords);
     const res = await results.json();
+    
     const ul = document.createElement("ul");
     ul.className = "ulContentSearch";
     res.data.forEach((item) => {

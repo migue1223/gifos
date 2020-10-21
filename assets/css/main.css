@@ -477,6 +477,7 @@ body {
   text-align: left;
   background-color: #fff;
   margin-left: 24px;
+  border-radius: 10px;
 }
 .ulContentSearch li {
   line-height: 30px;
@@ -866,38 +867,41 @@ body {
   .contentResultsGifos span img:hover {
     cursor: pointer;
   }
-  /* content mis gifos */
-  .misGifosFavoritos figure img:hover {
+
+  /* mis favoritos */
+  .containerMisGifosFavoritos figure img:hover {
     cursor: pointer;
   }
 
-  .misGifosFavoritos figure img:hover ~ h2 {
+  .containerMisGifosFavoritos figure img:hover ~ h2 {
     display: block;
   }
 
-  .misGifosFavoritos figure img:hover ~ h3 {
+  .containerMisGifosFavoritos figure img:hover ~ h3 {
     display: block;
   }
 
-  .misGifosFavoritos figure img:hover + span {
+  .containerMisGifosFavoritos figure img:hover + span {
     display: block;
   }
 
-  .misGifosFavoritos span:hover {
+  .containerMisGifosFavoritos span:hover {
     display: block;
   }
-  .misGifosFavoritos span:hover ~ h2 {
+  .containerMisGifosFavoritos span:hover ~ h2 {
     display: block;
   }
-  .misGifosFavoritos span:hover ~ h3 {
+  .containerMisGifosFavoritos span:hover ~ h3 {
     display: block;
   }
-  .misGifosFavoritos span img:hover {
+  .containerMisGifosFavoritos span img:hover {
     cursor: pointer;
   }
+
 }
 
 @media (max-width: 1024px) {
+  /*trending*/
   .containerImgGifos {
     margin: 0 auto;
     display: flex;
@@ -908,7 +912,6 @@ body {
     width: 243px;
     height: 187px;
     border: none;
-    margin: 0 22px;
     margin-bottom: 82px;
   }
   .containerImgGifos figure img {
@@ -916,26 +919,11 @@ body {
     height: 187px;
     border: 0;
   }
-  .misGifosFavoritos figure {
-    width: 243px;
-    height: 187px;
-    border: none;
-    margin: 0 22px;
-    margin-bottom: 82px;
-  }
-  .misGifosFavoritos figure img {
-    width: 243px;
-    height: 187px;
-    border: 0;
-  }
+
   .containerImgGifos figure span {
-    display: block;
+    display: none;
   }
-  .containerImgGifos span img {
-    margin: 0 5px;
-    width: 25px;
-    height: 25px;
-  }
+ 
   .containerImgGifos .buttonSliderLeft {
     display: none;
   }
@@ -943,23 +931,43 @@ body {
   .containerImgGifos .buttonSliderRight {
     display: none;
   }
+
+  /*favoritos*/
+  .containerMisGifosFavoritos figure {
+    width: : 243px;
+    height: 187px;
+    border: none;
+  }
+
+  .containerMisGifosFavoritos figure img {
+    width: 243px;
+    height: 187px;
+    border: 0;
+  }
+  /*section busqueda*/
+  .contentResultsGifos figure {
+    width: : 243px;
+    height: 187px;
+    border: none;
+  }
+
+  .contentResultsGifos figure img {
+    width: 243px;
+    height: 187px;
+    border: 0;
+  }
+
+  .contentResultsGifos figure span {
+    display: none;
+  }
+
   .modalDialog {
     overflow: hidden;
   }
   .containerOpenModal {
     overflow: hidden;
   }
-  .contentResultsGifos figure span {
-    display: block;
-    position: initial;
-    margin-left: 70%;
-    margin-top: -77%;
-  }
-  .contentResultsGifos figure span img {
-    margin: 0 3px;
-    width: 20px;
-    height: 20px;
-  }
+  
 }
 
 @media (max-width: 768px) {
@@ -1012,7 +1020,7 @@ body {
   }
 
   .botoneraMovil ul li {
-    visibility: hidden;
+    display: none;
     width: 100%;
     height: 60px;
     line-height: 60px;
@@ -1059,7 +1067,7 @@ body {
   }
 
   .botonMovil:checked ~ .botoneraMovil.botoneraMovil ul li {
-    visibility: visible;
+    display: block;
   }
 
   .botonMovil:checked ~ .botoneraMovil.botoneraMovil {
@@ -1121,6 +1129,7 @@ body {
     color: white;
   }
 
+  /*section busqueda*/
   .contentResultsGifos figure {
     width: 156px;
     height: 120px;
@@ -1132,12 +1141,14 @@ body {
     border: 0;
   }
 
-  .misGifosFavoritos figure {
-    width: 156px;
+  /*section favoritos*/
+  .containerMisGifosFavoritos figure {
+     width: 156px;
     height: 120px;
     margin: 21px 21px;
   }
-  .misGifosFavoritos figure img {
+
+  .containerMisGifosFavoritos figure img {
     width: 156px;
     height: 120px;
     border: 0;
@@ -1181,10 +1192,6 @@ body {
     right: 10%;
     top: 5%;
   }
-  .contentResultsGifos figure span {
-    margin-left: 50%;
-    margin-top: -79%;
-  }
 }
 
 @media (max-width: 425px) {
@@ -1205,6 +1212,11 @@ body {
   .contentResultsGifos figure {
     margin: 10px 10px;
   }
+
+  .containerMisGifosFavoritos figure {
+    margin: 10px 10px;
+  }
+
   .containerOpenModal figure {
     width: 250px;
   }
@@ -1221,15 +1233,22 @@ body {
     width: 130px;
     margin: 5px 5px;
   }
-  .misGifosFavoritos figure {
+
+  .containerMisGifosFavoritos figure {
     width: 130px;
     margin: 5px 5px;
   }
+
+  .containerMisGifosFavoritos figure img {
+    width: 130px;
+    margin: 5px 5px;
+  }
+
   .containerOpenModal figure {
     width: 240px;
   }
-  .contentResultsGifos figure span {
-    margin-left: 40%;
-    margin-top: -95%;
+
+  .ulContentSearch {
+    width: 240px;
   }
 }
