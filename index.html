@@ -11,6 +11,7 @@
     />
     <link rel="stylesheet" href="assets/css/dark.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.5.6/RecordRTC.js"></script>
     <title>Gifos</title>
   </head>
   <body>
@@ -38,7 +39,9 @@
       </figure>
       <input type="checkbox" id="botonMovil" class="botonMovil" />
       <label for="botonMovil" class="labelMovil"
-        ><span class="icons-bars-times"><i class="fas fa-bars text-white-mode"></i><i class="fas fa-times text-white-mode"></i></span
+        ><span class="icons-bars-times"
+          ><i class="fas fa-bars text-white-mode"></i
+          ><i class="fas fa-times text-white-mode"></i></span
       ></label>
       <nav class="botoneraMovil nav-white-mode">
         <ul>
@@ -63,7 +66,7 @@
       </nav>
     </header>
 
-    <section class="sectionBuscador">
+    <section class="sectionBuscador hiddenCrearGifo">
       <h1 class="titleBuscador text-white-mode">
         Inspírate, busca, guarda, y crea <br />
         los mejores <s>GIFOS</s>
@@ -101,7 +104,7 @@
       </button>
     </section>
 
-    <section class="misGifosFavoritos">
+    <section class="misGifosFavoritos hiddenCrearGifo">
       <img src="assets/img/icon-favoritos.svg" alt="Favoritos" />
       <h2 class="trendingGifos text-white-mode">Favoritos</h2>
       <div
@@ -123,7 +126,7 @@
       </div>
     </section>
 
-    <section class="misGifos">
+    <section class="misGifos hiddenCrearGifo">
       <img src="assets/img/icon-mis-gifos.svg" alt="Mis Gifos" />
       <h2 class="titleMisGifos text-white-mode">Mis Gifos</h2>
       <div class="containerMisGifos" id="containerMisGifos"></div>
@@ -139,7 +142,7 @@
       </div>
     </section>
 
-    <section id="trendingGifos" class="trendingGifos trending-gifos-white">
+    <section id="trendingGifos" class="trendingGifos trending-gifos-white hiddenCrearGifo">
       <h2 class="text-white-mode">Trending GIFOS</h2>
       <div>
         <p class="p-dark-mode">Mira los últimos</p>
@@ -147,7 +150,7 @@
       </div>
     </section>
 
-    <section class="containerImgGifos trending-gifos-white">
+    <section class="containerImgGifos trending-gifos-white hiddenCrearGifo">
       <img
         class="buttonSliderLeft retrocederSliderTrending white-mode-slider-left"
         src="assets/img/button-slider-left.svg"
@@ -158,6 +161,38 @@
         src="assets/img/Button-Slider-right.svg"
         alt="Button Rights"
       />
+    </section>
+
+    <section id="containerSubirGifo" class="containerSubirGifo">
+        <figure class="imageCamSubir">
+          <img class="imageCam1" src="assets/img/camara.svg" alt="Camara" />
+          <img class="imageCam2" src="assets/img/element-luz-camara.svg" alt="Element camara">
+        </figure>
+        <figure class="imageCamPelicula">
+          <img src="assets/img/pelicula.svg" alt="">
+        </figure>
+        <div id="containerCrearGifo" class="containerCrearGifo">
+          <h2 class="tcrear1 title-crear-gifos text-white-mode">Aqui podrás <br> crear tus propios <s>GIFOS</s></h2>
+          <p class="tcrear1">!Crea tu GIFO en sólo 3 pasos!</p>
+          <p class="tcrear1">(sólo necesitas una cámara para grabar un video)</p>
+
+          <h2 class="tcrear2 title-crear-gifos text-white-mode">¿Nos das acceso <br> a tu cámara?</h2>
+          <p class="tcrear2">El acceso a tu camara será valido sólo</p>
+          <p class="tcrear2">por el tiempo en el que estés creando el GIFO</p>
+
+          <video class="container-video-gif" id="container-video-gif" autoplay></video>
+          <img class="previewImgGif" src="" alt="Preview Gif">
+        </div>
+        <div class="containerPasos">
+          <img class="paso1" src="assets/img/paso-a-paso.svg" alt="Paso 1">
+          <img class="paso2" src="assets/img/paso-a-paso2.svg" alt="Paso 2">
+          <img class="paso3" src="assets/img/paso-a-paso3.svg" alt="Paso 3">
+        </div>
+        <hr class="hr-image-subir">
+        <button class="actions-buttons buttonComenzar">COMENZAR</button>
+        <button class="actions-buttons buttonGrabar">GRABAR</button>
+        <button class="actions-buttons buttonFinalizar">FINALIZAR</button>
+        <button class="actions-buttons buttonSubirGifo">SUBIR GIFO</button>
     </section>
 
     <footer class="containerFooter">
@@ -199,5 +234,6 @@
     <script type="module" src="api/index.js"></script>
     <script type="module" src="assets/js/main.js"></script>
     <script type="module" src="assets/js/funcionesGenerales.js"></script>
+    <script type="module" src="assets/js/crearGifos.js"></script>
   </body>
 </html>

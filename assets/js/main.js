@@ -19,11 +19,13 @@ const containerMisGifosFavoritos = document.getElementById(
   "containerMisGifosFavoritos"
 );
 const containerMisGifos_ = document.querySelector(".misGifos");
+const container_MisGifos = document.getElementById("containerMisGifos");
 const containerBuscador = document.querySelector(".sectionBuscador");
 const containerModal = document.getElementById("containerOpenModal");
 const containerNotFoundFavorites = document.getElementById("notFoundFavorites");
 const containerNotFoundMisGifos = document.getElementById("notFoundMisGifos");
 const containerTrendingP = document.querySelector(".containerTrendingP");
+const containerCrearGifo = document.getElementById("containerSubirGifo");
 
 const inputSearch = document.getElementById("inputSearch");
 const imageBuscador = document.querySelector(".imageBuscador");
@@ -269,6 +271,7 @@ titleMisGifos.addEventListener("click", () => {
   containerBuscador.style.display = "none";
   containerMisGifos_.style.display = "none";
   containerNotFoundFavorites.style.display = "none";
+  containerCrearGifo.style.display = "none";
   containerMisGifos.style.display = "flex";
 
   if (apiGiphy.localStorageFavorites.length === 0) {
@@ -315,23 +318,39 @@ seeMoreButtonFavorite.addEventListener("click", async () => {
   }
 });
 
-// click en title gifos
+// click en title mis gifos
 titleGifos.addEventListener("click", () => {
   containerBuscador.style.display = "none";
   containerMisGifos.style.display = "none";
   containerNotFoundMisGifos.style.display = "none";
+  containerCrearGifo.style.display = "none";
   containerMisGifos_.style.display = "flex";
 
   if (apiGiphy.localStorageMisGifos.length === 0) {
     containerNotFoundMisGifos.style.display = "flex";
   }
+  const imgs = containerMisGifos_.querySelectorAll("figure");
+  if (imgs.length > 0) {
+    imgs.forEach((element) => {
+      element.parentNode.removeChild(element);
+    });
+  }
+  renderGifo(
+    apiGiphy.localStorageMisGifos.slice(0, 12),
+    container_MisGifos,
+    "misGifosSlider"
+  );
+  removeClassLoader();
 });
 
 // click en image header
 imageHeader.addEventListener("click", () => {
   containerMisGifos.style.display = "none";
   containerMisGifos_.style.display = "none";
+  containerCrearGifo.style.display = "none";
   containerBuscador.style.display = "flex";
+  containerTrendingGifos.style.display = "flex";
+  containerGifos.style.display = "flex";
 
   const imgs = containerGifos.querySelectorAll("figure");
   imgs.forEach((item) => item.parentNode.removeChild(item));
@@ -701,7 +720,7 @@ async function getSuggestionsSearh(keywords) {
   try {
     const results = await apiGiphy.getSuggestionsListCategory(keywords);
     const res = await results.json();
-    
+
     const ul = document.createElement("ul");
     ul.className = "ulContentSearch";
     res.data.forEach((item) => {

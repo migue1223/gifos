@@ -299,6 +299,7 @@ body {
   margin: 0 5px;
   width: 25px;
   height: 25px;
+  border-radius: 6px;
 }
 
 .contentResultsGifos figure h2 {
@@ -366,6 +367,7 @@ body {
   margin: 0 5px;
   width: 25px;
   height: 25px;
+  border-radius: 6px;
 }
 
 .containerMisGifosFavoritos figure h2 {
@@ -736,6 +738,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 78px;
 }
 
 .notFoundMisGifos {
@@ -774,9 +777,171 @@ body {
   margin-bottom: 36px;
 }
 
+.containerMisGifos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.containerMisGifos figure {
+  width: 260px;
+  height: 200px;
+  margin: 21px 21px;
+}
+
+.containerMisGifos figure img {
+  width: 260px;
+  height: 200px;
+}
+
+.containerMisGifos figure span {
+  display: block;
+  margin-left: 59%;
+  margin-top: -77%;
+}
+
+.containerMisGifos figure span img {
+  margin: 0 5px;
+  width: 25px;
+  height: 25px;
+  border-radius: 6px
+}
+
+.containerMisGifos figure h2 {
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  color: #ffffff;
+  text-align: left;
+  margin-bottom: 0;
+  margin-left: 5%;
+  margin-top: 30%;
+  display: none;
+}
+
+.containerMisGifos figure h3 {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: left;
+  margin-left: 5%;
+  display: none;
+}
+
 /* crear gifos */
 .crearGifos:hover {
   cursor: pointer;
+}
+
+/*crear mis gifos*/
+.containerSubirGifo {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageCamSubir {
+  position: absolute;
+  margin-right: 70%;
+}
+
+.imageCamPelicula {
+  position: absolute;
+  margin-left: 70%;
+  margin-top: 22%;
+}
+
+.imageCam2 {
+  position: absolute;
+  margin-top: 16%;
+}
+
+.containerCrearGifo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 688px;
+  height: 390px;
+  border: 1px solid #572ee5;
+}
+
+.containerCrearGifo p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  text-align: center;
+  line-height: 29px;
+}
+
+.title-crear-gifos {
+  font-family: "Montserrat", sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 35px;
+}
+
+.title-crear-gifos s {
+  color: #50e3c2;
+}
+
+.tcrear2 {
+  display: none;
+}
+
+.hr-image-subir {
+  width: 795px;
+  height: 6.9px;
+  background-color: #572ee5;
+  border: none;
+  border-radius: 10px;
+}
+
+.containerPasos {
+  margin: 29px 0;
+}
+
+.containerPasos img {
+  margin: 0 20px;
+}
+
+.actions-buttons {
+  width: 127px;
+  height: 50px;
+  border-radius: 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  outline: none;
+  margin-top: 21px;
+  background-color: #fff;
+}
+
+.actions-buttons:hover {
+  cursor: pointer;
+}
+
+.buttonGrabar {
+  display: none;
+}
+
+.buttonFinalizar {
+  display: none;
+}
+
+.buttonSubirGifo {
+  display: none;
+}
+
+.container-video-gif{
+  display: none;
+  width: 688px;
+  height: 330px;
+}
+.previewImgGif{
+  display: none;
+  width: 550px;
+  height: 300px;
 }
 
 /* footer */
@@ -897,7 +1062,32 @@ body {
   .containerMisGifosFavoritos span img:hover {
     cursor: pointer;
   }
+  /* mis gifos */
+  .containerMisGifos figure img:hover {
+    cursor: pointer;
+  }
+  .containerMisGifos figure img:hover ~ h2 {
+    display: block;
+  }
 
+  .containerMisGifos figure img:hover ~ h3 {
+    display: block;
+  }
+  .containerMisGifos figure img:hover + span {
+    display: block;
+  }
+  .containerMisGifos span:hover {
+    display: block;
+  }
+  .containerMisGifos span:hover ~ h2 {
+    display: block;
+  }
+  .containerMisGifos span:hover ~ h3 {
+    display: block;
+  }
+  .containerMisGifos span img:hover {
+    cursor: pointer;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -923,7 +1113,7 @@ body {
   .containerImgGifos figure span {
     display: none;
   }
- 
+
   .containerImgGifos .buttonSliderLeft {
     display: none;
   }
@@ -934,7 +1124,7 @@ body {
 
   /*favoritos*/
   .containerMisGifosFavoritos figure {
-    width: : 243px;
+    width: 243px;
     height: 187px;
     border: none;
   }
@@ -946,7 +1136,7 @@ body {
   }
   /*section busqueda*/
   .contentResultsGifos figure {
-    width: : 243px;
+    width: 243px;
     height: 187px;
     border: none;
   }
@@ -967,7 +1157,6 @@ body {
   .containerOpenModal {
     overflow: hidden;
   }
-  
 }
 
 @media (max-width: 768px) {
@@ -1143,7 +1332,7 @@ body {
 
   /*section favoritos*/
   .containerMisGifosFavoritos figure {
-     width: 156px;
+    width: 156px;
     height: 120px;
     margin: 21px 21px;
   }
