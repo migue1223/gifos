@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gifos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="author" content="Ana Julia Velez Rueda">
+    <link rel="stylesheet" type="text/css" href="style/index.css"></link>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;1,100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.5.6/RecordRTC.js"></script>
+    <script src="crear.js" type="text/javascript" charset="utf-8" async defer></script>
+</head>
+
+<body>
+    <header id="header">
+        <nav class="nav-bar">
+            <figure class="logo">
+                <a href="index.html"><img src="images/logo-mobile.svg" alt="logo-mobile" class="logo-mobile"></a>
+                <a href="index.html"><img src="images/logo-desktop.svg" alt="logo-desck" class="logo-desck"></a>
+            </figure>
+            <div class="ham-menu">
+                <input type="checkbox" id="toggle" class="menu" />
+                <label for="toggle" class="menu">
+	                <i class="fas fa-bars"></i>
+	            </label>
+                <ul class="main-menu menu-ul">
+                    <li></li>
+                    <li><a href="#" class="opciones">MODO NOCTURNO</a></li>
+                    <li><a href="#" class="opciones">FAVORITOS</a></li>
+                    <li><a href="#" class="opciones">MIS GIFOS</a></li>
+                    <li>
+                        <a href="crear.html" class="opciones"><img src="images/CTA-crear-gifo-active.svg" alt="crear" class="crear"></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="main-crear">
+        <section class="camara-viewer">
+            <img src="images/camara.svg" alt="camara">
+            <img src="images/element-luz-camara.svg" class="element-luz-camara" alt="element-luz-camara">
+            <div class="camera-window">
+                <div class="camera-container">
+                    <div class="text-container active" id="text-container">
+                        <h2 class="camera-container-title">Aquí podrás <br>crear tus propios <span class="gifos-text">GIFOS<span></h2>
+    					<p>¡Crea tu GIFO en sólo 3 pasos! <br>(sólo necesitas una cámara para grabar un video)</p>
+    				</div>
+    				<video src="#" class="video" id="video"></video>
+    			</div>
+    		</div>	
+    	</section>
+
+    	<section class="pasos">
+    		<ul class="pasos-list">
+	    		<li class="step-position" id="button-paso1">1</li>
+	    		<li class="step-position" id="button-paso2">2</li>
+	    		<li class="step-position" id="button-paso3">3</li>
+	    		<li  class="repetir-captura" id="repetir-captura">REPETIR CAPTURA</li>
+	    		<li class="recording-time" id="recording-time">time:minutes</li>
+    		</ul>
+    		<figure class="element-cinta">
+    			<img src="images/pelicula.svg" alt="element-cinta">
+    		</figure>
+    		<div class="violet-line">
+    			<button class="step-button active" id="comenzar">COMENZAR</button>
+    			<button class="step-button" id="grabar">GRABAR</button>
+    			<button class="step-button" id="finalizar">FINALIZAR</button>
+    			<button class="step-button" id="subir">SUBIR</button>
+    		</div>
+    	</section>		
+    </main>
+
+    <footer class="crear-footer">
+    	<section class="footer" id="footer">
+    		<div class="socialnets">
+	    		<p>Compartir en:</p>
+	            <ul class="contac-icons">
+	                <li class="nav-item">
+	                    <a class="nav-link" href="#"><i class="fab fa-instagram"></i></a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="#"><i class="fab fa-twitter"></i></a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="#"><i class="fab fa-facebook"></i></a>
+	                </li>
+	            </ul>
+            </div>
+            <p class="footer-text">© GIFOS 2020 All Rights Reserved</p>
+        </section>
+    </footer>
+</body>
+
+</html>
