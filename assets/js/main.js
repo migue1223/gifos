@@ -711,21 +711,25 @@ async function getLastGifs() {
     const res = await results.json();
     localStorage.setItem("listTrending", JSON.stringify(res.data));
     if (window.matchMedia("(max-width: 1024px)").matches) {
-      renderGifo(
-        apiGiphy.localStorageTrending.slice(0, 12),
-        containerGifos,
-        "trendingSlider",
-        "hover-gif-image",
-        "hover-general-gif"
-      );
+      setTimeout(() => {
+        renderGifo(
+          apiGiphy.localStorageTrending.slice(0, 12),
+          containerGifos,
+          "trendingSlider",
+          "hover-gif-image",
+          "hover-general-gif"
+        );
+      }, 1000);
     } else {
-      renderGifo(
-        apiGiphy.localStorageTrending.slice(0, 3),
-        containerGifos,
-        "trendingSlider",
-        "hover-gif-image",
-        "hover-general-gif"
-      );
+      setTimeout(() => {
+        renderGifo(
+          apiGiphy.localStorageTrending.slice(0, 3),
+          containerGifos,
+          "trendingSlider",
+          "hover-gif-image",
+          "hover-general-gif"
+        );
+      }, 1000);
     }
     removeClassLoader();
   } catch (error) {
