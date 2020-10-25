@@ -42,6 +42,7 @@ const moveSlider = document.querySelector(".avanzarSliderTrending");
 const backSlider = document.querySelector(".retrocederSliderTrending");
 const modalGifos = document.getElementById("openModal");
 const buttonNavMovil = document.querySelector(".icons-bars-times");
+const buttonAddGifos = document.getElementById("crearGifos");
 
 let dataSearchs = [];
 let resSlider = [];
@@ -230,6 +231,12 @@ imageHeader.addEventListener("click", () => {
   containerTrendingGifos.style.display = "flex";
   containerGifos.style.display = "flex";
 
+  if (localStorage.getItem("mode-dark") === "black") {
+    buttonAddGifos.src = "assets/img/CTA-crar-gifo-modo-noc.svg";
+  } else {
+    buttonAddGifos.src = "assets/img/button-crear-gifo.svg";
+  }
+
   const imgs = containerGifos.querySelectorAll("figure");
   imgs.forEach((item) => item.parentNode.removeChild(item));
 
@@ -264,7 +271,7 @@ async function avanzarSlider() {
   const indiceFavorites = apiGiphy.localStorageFavorites.length - 1;
   const indiceTrending = apiGiphy.localStorageTrending.length - 1;
   const indiceSearch = apiGiphy.localStorageSearch.length - 1;
-  const indiceMisGifos = apiGiphy.localStorageMisGifos - 1;
+  const indiceMisGifos = apiGiphy.localStorageMisGifos.length - 1;
 
   buttonSliderLeft.style.visibility = "hidden";
   buttonSliderRight.style.visibility = "hidden";
@@ -478,7 +485,6 @@ async function retrocederSlider() {
     }
   }
 
-  
   if (indexMisGifos !== 0) {
     if (classSlider === "misGifosSlider") {
       renderGifo(
@@ -558,7 +564,13 @@ moveSlider.addEventListener("click", () => {
   imgs.forEach((item) => item.parentNode.removeChild(item));
 
   if (resSlider[0] === "avanzarSlider") {
-    renderGifo(dataAvanzarSlider, containerGifos, "trendingSlider", "hover-gif-image", "hover-general-gif");
+    renderGifo(
+      dataAvanzarSlider,
+      containerGifos,
+      "trendingSlider",
+      "hover-gif-image",
+      "hover-general-gif"
+    );
   } else {
     renderGifo(
       apiGiphy.localStorageTrending.slice(sliceStart, sliceEnd),
@@ -585,7 +597,9 @@ backSlider.addEventListener("click", () => {
     renderGifo(
       apiGiphy.localStorageTrending.slice(0, 3),
       containerGifos,
-      "trendingSlider", "hover-gif-image", "hover-general-gif"
+      "trendingSlider",
+      "hover-gif-image",
+      "hover-general-gif"
     );
   } else {
     renderGifo(
@@ -655,8 +669,13 @@ async function getResultsTags(keywords) {
     containerSearchGifos.style.display = "block";
     titleCategorySearch.innerHTML = keywords;
     showTitleImageSearch();
-    renderGifo(res.data, containerSearchResultsGifos, "searchSlider",  "hover-container-gifs",
-    "container-general-gifs");
+    renderGifo(
+      res.data,
+      containerSearchResultsGifos,
+      "searchSlider",
+      "hover-container-gifs",
+      "container-general-gifs"
+    );
     seeMoreButton.style.display = "block";
     removeClassLoader();
   } catch (error) {

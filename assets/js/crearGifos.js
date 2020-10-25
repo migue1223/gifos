@@ -1,6 +1,7 @@
 "use strict";
 
 import apiGiphy from "../../api/index.js";
+import { downloadIconGifo } from "./funcionesGenerales.js";
 
 const containerCrearGifo = document.getElementById("containerSubirGifo");
 const containers = document.querySelectorAll(".hiddenCrearGifo");
@@ -23,10 +24,13 @@ const loaderSubirGifo = document.querySelector(".loader-subir-gifo");
 const loaderExitoGifo = document.querySelector(".loader-exito-gifo");
 const imgSubir = document.querySelector(".img-loader-subir");
 const imgExito = document.querySelector(".img-loader-exito");
+const spanActions = document.querySelector(".container-icon-crear");
+const iconDownload = document.querySelector(".a-download");
+const iconLink = document.querySelector(".a-link");
 
 let counter = document.querySelector(".counter");
 let countdown;
-let stream, recorder;
+let stream, recorder, imageUrl;
 
 function buttonsActionsModeDark(paso1, paso2, paso3) {
   if (localStorage.getItem("mode-dark") === "black") {
@@ -46,9 +50,35 @@ buttonAddGifos.addEventListener("click", () => {
   const paso1 = document.querySelector(".paso1");
   const paso2 = document.querySelector(".paso2");
   const paso3 = document.querySelector(".paso3");
+  if (localStorage.getItem("mode-dark") === "black") {
+    buttonAddGifos.src = "assets/img/CTA-crear-gifo-active.svg";
+  } else {
+    buttonAddGifos.src = "assets/img/CTA-crear-gifo-hover.svg";
+  }
   buttonsActionsModeDark(paso1, paso2, paso3);
   repeatCapture();
 });
+
+async function getStreamAndRecord() {
+  stream = await navigator.mediaDevices.getUserMedia({
+    audio: false,
+    video: {},
+  });
+  if (stream.active === true) {
+    textCrear2.forEach((item) => (item.style.display = "none"));
+    video.style.display = "block";
+    video.srcObject = stream;
+    buttonGrabar.style.display = "block";
+    if (localStorage.getItem("mode-dark") === "black") {
+      paso1.src = "assets/img/paso-a-paso-mod-noc.svg";
+      paso2.src = "assets/img/paso-a-paso-hover-mod-noc2.svg";
+    } else {
+      paso1.src = "assets/img/paso-a-paso.svg";
+      paso2.src = "assets/img/paso-a-paso-hover2.svg";
+    }
+    counter.style.display = "block";
+  }
+}
 
 buttonComenzar.addEventListener("click", async () => {
   buttonComenzar.style.display = "none";
@@ -81,7 +111,7 @@ buttonFinalizar.addEventListener("click", () => {
   counter.innerHTML = "REPETIR CAPTURA";
   const blob = recorder.getBlob();
   let urlCreator = window.URL || window.webkitURL;
-  let imageUrl = urlCreator.createObjectURL(blob);
+  imageUrl = urlCreator.createObjectURL(blob);
   previewImg.src = imageUrl;
   video.style.display = "none";
   previewImg.style.display = "block";
@@ -103,40 +133,46 @@ buttonUpload.addEventListener("click", async () => {
   }
   counter.style.display = "none";
   buttonUpload.style.display = "none";
-  // const form = new FormData();
-  // form.append("file", recorder, "myGif.gif");
-  // form.append("tags", "pet, cat, meow");
-  // const uploadGif = await fetch(
-  //   `http://upload.giphy.com/v1/gifs?api_key=u1D9iripUKO0Kpv6uxr8vxuPwAs0z2J4`,
-  //   {
-  //     method: "POST",
-  //     body: form,
-  //   }
-  // );
-  setTimeout(() => {
+  let form = new FormData();
+  form.append("file", recorder.getBlob(), "myGif.gif");
+  form.append("tags", "");
+  const uploadGif = await fetch(
+    `${apiGiphy.API_URL_UPLOAD}api_key=${apiGiphy.API_KEY}`,
+    {
+      method: "POST",
+      body: form,
+    }
+  );
+  const resUpload = await uploadGif.json();
+  if (resUpload.meta.status === 200) {
     loaderSubirGifo.style.display = "none";
     imgSubir.style.display = "none";
     loaderExitoGifo.style.display = "block";
     imgExito.style.display = "block";
-  }, 3000);
-  // const resUpload = await uploadGif.json();
-  // if (resUpload.meta.status === 200) {
-  //   loaderSubirGifo.style.display = "none";
-  //   loaderExitoGifo.style.display = "block";
-  //   const results = await apiGiphy.getGifoId(resUpload.data.id);
-  //   const res = await results.json();
-  //   apiGiphy.localStorageMisGifos.push({
-  //     id: res.data.id,
-  //     title: res.data.title,
-  //     username: res.data.username,
-  //     images: { original: { url: res.data.images.original.url } },
-  //   });
+    spanActions.style.display = "block";
+    iconDownload.download = "mygif";
+    iconDownload.href = imageUrl;
+    iconDownload.dataset.downloadurl = [
+      "application/octet-stream",
+      iconDownload.download,
+      iconDownload.href,
+    ].join(":");
+    const results = await apiGiphy.getGifoId(resUpload.data.id);
+    const res = await results.json();
+    console.log(res);
+    iconLink.href = res.data.url;
+    apiGiphy.localStorageMisGifos.push({
+      id: res.data.id,
+      title: res.data.title,
+      username: res.data.username,
+      images: { original: { url: res.data.images.original.url } },
+    });
 
-  //   localStorage.setItem(
-  //     "listMisGifos",
-  //     JSON.stringify(apiGiphy.localStorageMisGifos)
-  //   );
-  // }
+    localStorage.setItem(
+      "listMisGifos",
+      JSON.stringify(apiGiphy.localStorageMisGifos)
+    );
+  }
 });
 
 function onGifRecordingStarted(recorder) {
@@ -159,6 +195,7 @@ function repeatCapture() {
   buttonUpload.style.display = "none";
   buttonFinalizar.style.display = "none";
   buttonGrabar.style.display = "none";
+  spanActions.style.display = "none";
   buttonComenzar.style.display = "block";
 }
 
@@ -179,27 +216,6 @@ function timer() {
       }
     }
   }, 1000);
-}
-
-async function getStreamAndRecord() {
-  stream = await navigator.mediaDevices.getUserMedia({
-    audio: false,
-    video: {},
-  });
-  if (stream.active === true) {
-    textCrear2.forEach((item) => (item.style.display = "none"));
-    video.style.display = "block";
-    video.srcObject = stream;
-    buttonGrabar.style.display = "block";
-    if (localStorage.getItem("mode-dark") === "black") {
-      paso1.src = "assets/img/paso-a-paso-mod-noc.svg";
-      paso2.src = "assets/img/paso-a-paso-hover-mod-noc2.svg";
-    } else {
-      paso1.src = "assets/img/paso-a-paso.svg";
-      paso2.src = "assets/img/paso-a-paso-hover2.svg";
-    }
-    counter.style.display = "block";
-  }
 }
 
 export { buttonsActionsModeDark };
