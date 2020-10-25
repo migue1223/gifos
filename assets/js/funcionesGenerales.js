@@ -11,11 +11,14 @@ import {
 const modalGifos = document.getElementById("openModal");
 const containerModal = document.getElementById("containerOpenModal");
 
-// crear el gifo
-function renderGifo(list, container, classSlider) {
+function renderGifo(list, container, classSlider, hoverGeneral, classGeneral) {
   list.forEach(async (item) => {
     const figure = document.createElement("figure");
     const image = document.createElement("img");
+    const imageHover = document.createElement("img");
+    imageHover.classList = hoverGeneral;
+    figure.appendChild(imageHover);
+    figure.classList = classGeneral;
     image.classList = "loaderGifos";
     figure.appendChild(image);
     container.appendChild(figure);
@@ -26,6 +29,7 @@ function renderGifo(list, container, classSlider) {
     const favoriteIcon = favoriteIconGifo(item, classSlider);
     const downloadIcon = await downloadIconGifo(item);
     const expandIcon = expandIconGifo(item, classSlider);
+    const removeIcon = removeIconFavorite(item);
 
     image.src = item.images.original.url;
     image.alt = item.title;
@@ -37,6 +41,10 @@ function renderGifo(list, container, classSlider) {
     spanIcons.appendChild(favoriteIcon);
     spanIcons.appendChild(downloadIcon);
     spanIcons.appendChild(expandIcon);
+    if (classSlider === "favoritesSlider" || classSlider === "misGifosSlider") {
+      spanIcons.appendChild(removeIcon);
+      favoriteIcon.style.display = "none";
+    }
     h2User.innerText = item.username;
     h3Title.innerText = item.title;
     if (localStorage.getItem("mode-dark") === "black") {
@@ -53,7 +61,6 @@ function renderGifo(list, container, classSlider) {
   });
 }
 
-// para descargar el gifo
 async function downloadIconGifo(item) {
   const downloadIcon = document.createElement("img");
   downloadIcon.classList = "icon-default-download icon-download-hover";
@@ -69,7 +76,6 @@ async function downloadIconGifo(item) {
   return a;
 }
 
-// icono de favoritos
 function favoriteIconGifo(item, classSlider) {
   const favoriteIcon = document.createElement("img");
   favoriteIcon.setAttribute("data-id-gifo", item.id);
@@ -94,7 +100,6 @@ function favoriteIconGifo(item, classSlider) {
   return favoriteIcon;
 }
 
-// icono de expandir pantalla completa Gifo
 function expandIconGifo(item, classSlider) {
   const expandIcon = document.createElement("img");
   expandIcon.classList = `icon-default-expand icon-expand-hover ${classSlider}`;
@@ -104,7 +109,20 @@ function expandIconGifo(item, classSlider) {
   return expandIcon;
 }
 
-// adicionar gifo a favoritos
+function removeIconFavorite(item) {
+  const removeIcon = document.createElement("img");
+  removeIcon.classList = `icon-default-remove icon-remove-hover`;
+  removeIcon.setAttribute("data-id-gifo", item.id);
+  removeIcon.addEventListener("click", removeFavoriteGifo);
+  removeIcon.addEventListener("click", removeElementGifo);
+  return removeIcon;
+}
+
+function removeElementGifo() {
+  const gifo = this.parentElement.parentElement;
+  gifo.parentNode.removeChild(gifo);
+}
+
 async function addFavoriteGifo() {
   const idGifo = this.getAttribute("data-id-gifo");
   const titleGifo = this.getAttribute("data-title-gifo");
@@ -122,14 +140,12 @@ async function addFavoriteGifo() {
     username: userGifo,
     images: { original: { url: urlGifo } },
   });
-
   localStorage.setItem(
     "listFavorites",
     JSON.stringify(apiGiphy.localStorageFavorites)
   );
 }
 
-// remover gifo de favoritos
 async function removeFavoriteGifo() {
   const idGifo = this.getAttribute("data-id-gifo");
   this.classList.remove("icon-add-favorite");
@@ -138,19 +154,28 @@ async function removeFavoriteGifo() {
   this.removeEventListener("click", removeFavoriteGifo);
   this.addEventListener("click", addFavoriteGifo);
 
-  const validate = apiGiphy.localStorageFavorites.findIndex((item) => {
+  const validateF = apiGiphy.localStorageFavorites.findIndex((item) => {
     item.id === idGifo;
   });
-  if (validate === -1) {
-    apiGiphy.localStorageFavorites.splice(validate, 1);
+  const validateM = apiGiphy.localStorageMisGifos.findIndex((item) => {
+    item.id === idGifo
+  })
+  if (validateF === -1) {
+    apiGiphy.localStorageFavorites.splice(validateF, 1);
     localStorage.setItem(
       "listFavorites",
       JSON.stringify(apiGiphy.localStorageFavorites)
     );
   }
+  if(validateM === -1) {
+    apiGiphy.localStorageMisGifos.splice(validateM, 1);
+    localStorage.setItem(
+      "listMisGifos",
+      JSON.stringify(apiGiphy.localStorageMisGifos)
+    );
+  }
 }
 
-// validar si hay favoritos en localStorage y el container de gifos
 function renderSpanIconFavorite(lista) {
   const listContainer = lista;
   listContainer.forEach((item) => {
@@ -166,7 +191,6 @@ function renderSpanIconFavorite(lista) {
   });
 }
 
-// remover icono de favoritos al cerrar el modal
 function renderRemoveIconFavorite(container, idGifo, classIcon) {
   if (classIcon === null) {
     container.forEach((item) => {
@@ -181,7 +205,6 @@ function renderRemoveIconFavorite(container, idGifo, classIcon) {
   }
 }
 
-// crear modal gifo
 async function createModalClick() {
   modalGifos.style.display = "block";
   const buttonSliderLeft = document.querySelector(".buttonSliderLeft");
@@ -200,7 +223,7 @@ async function createModalClick() {
   });
 
   if (validate.length > 0) {
-    renderGifo(validate, containerModal, classSlider);
+    renderGifo(validate, containerModal, classSlider, "modal-hover", "");
     buttonSliderLeft.style.visibility = "visible";
     buttonSliderRight.style.visibility = "visible";
   } else {
@@ -208,7 +231,7 @@ async function createModalClick() {
     const res = await resultId.json();
     let data = [];
     data.push(res.data);
-    renderGifo(data, containerModal, classSlider);
+    renderGifo(data, containerModal, classSlider, "modal-hover", "");
     buttonSliderLeft.style.visibility = "visible";
     buttonSliderRight.style.visibility = "visible";
   }

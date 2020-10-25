@@ -106,7 +106,9 @@
 
     <section class="misGifosFavoritos hiddenCrearGifo">
       <img src="assets/img/icon-favoritos.svg" alt="Favoritos" />
-      <h2 class="trendingGifos text-white-mode">Favoritos</h2>
+      <h2 class="trendingGifos titleMisGifosFavoritos text-white-mode">
+        Favoritos
+      </h2>
       <div
         class="containerMisGifosFavoritos"
         id="containerMisGifosFavoritos"
@@ -142,7 +144,10 @@
       </div>
     </section>
 
-    <section id="trendingGifos" class="trendingGifos trending-gifos-white hiddenCrearGifo">
+    <section
+      id="trendingGifos"
+      class="trendingGifos trending-gifos-white hiddenCrearGifo"
+    >
       <h2 class="text-white-mode">Trending GIFOS</h2>
       <div>
         <p class="p-dark-mode">Mira los últimos</p>
@@ -164,35 +169,100 @@
     </section>
 
     <section id="containerSubirGifo" class="containerSubirGifo">
-        <figure class="imageCamSubir">
-          <img class="imageCam1" src="assets/img/camara.svg" alt="Camara" />
-          <img class="imageCam2" src="assets/img/element-luz-camara.svg" alt="Element camara">
-        </figure>
-        <figure class="imageCamPelicula">
-          <img src="assets/img/pelicula.svg" alt="">
-        </figure>
-        <div id="containerCrearGifo" class="containerCrearGifo">
-          <h2 class="tcrear1 title-crear-gifos text-white-mode">Aqui podrás <br> crear tus propios <s>GIFOS</s></h2>
-          <p class="tcrear1">!Crea tu GIFO en sólo 3 pasos!</p>
-          <p class="tcrear1">(sólo necesitas una cámara para grabar un video)</p>
+      <figure class="imageCamSubir">
+        <img class="imageCam1" src="assets/img/camara.svg" alt="Camara" />
+        <img
+          class="imageCam2"
+          src="assets/img/element-luz-camara.svg"
+          alt="Element camara"
+        />
+      </figure>
+      <figure class="imageCamPelicula">
+        <img src="assets/img/pelicula.svg" alt="" />
+      </figure>
 
-          <h2 class="tcrear2 title-crear-gifos text-white-mode">¿Nos das acceso <br> a tu cámara?</h2>
-          <p class="tcrear2">El acceso a tu camara será valido sólo</p>
-          <p class="tcrear2">por el tiempo en el que estés creando el GIFO</p>
+      <p class="counter">00:00:00</p>
 
-          <video class="container-video-gif" id="container-video-gif" autoplay></video>
-          <img class="previewImgGif" src="" alt="Preview Gif">
+      <img
+        class="img-loader-subir pasos-img-h2"
+        src="assets/img/loader.svg"
+        alt="Loader"
+      />
+      <img
+        class="img-loader-exito pasos-img-h2"
+        src="assets/img/check.svg"
+        alt="Check"
+      />
+      <span class="container-icon-crear">
+        <img
+          class="icon-default-download icon-download-hover icon-download-crear"
+          src="assets/img/icon-download.svg"
+        />
+        <img
+          class="icon-link-normal icon-link-hover icon-link-crear"
+          src="assets/img/icon-download.svg"
+        />
+      </span>
+
+      <h2 class="loader-subir-gifo pasos-img-h2">Estamos subiendo tu GIFO</h2>
+      <h2 class="loader-exito-gifo pasos-img-h2">GIFO subido con éxito</h2>
+
+      <div id="containerCrearGifo" class="containerCrearGifo">
+        <h2 class="tcrear1 title-crear-gifos text-white-mode">
+          Aqui podrás <br />
+          crear tus propios <s>GIFOS</s>
+        </h2>
+        <p class="tcrear1">!Crea tu GIFO en sólo 3 pasos!</p>
+        <p class="tcrear1">(sólo necesitas una cámara para grabar un video)</p>
+
+        <h2 class="tcrear2 title-crear-gifos text-white-mode">
+          ¿Nos das acceso <br />
+          a tu cámara?
+        </h2>
+        <p class="tcrear2">El acceso a tu camara será valido sólo</p>
+        <p class="tcrear2">por el tiempo en el que estés creando el GIFO</p>
+
+        <video
+          class="container-video-gif"
+          id="container-video-gif"
+          autoplay
+        ></video>
+        <div class="container-preview-video">
+          <img class="testing" />
+          <img
+            class="previewImgGif"
+            src="assets/img/Trick It Out French Fries GIF by Target.gif"
+            alt="Preview Gif"
+          />
         </div>
-        <div class="containerPasos">
-          <img class="paso1" src="assets/img/paso-a-paso.svg" alt="Paso 1">
-          <img class="paso2" src="assets/img/paso-a-paso2.svg" alt="Paso 2">
-          <img class="paso3" src="assets/img/paso-a-paso3.svg" alt="Paso 3">
-        </div>
-        <hr class="hr-image-subir">
-        <button class="actions-buttons buttonComenzar">COMENZAR</button>
-        <button class="actions-buttons buttonGrabar">GRABAR</button>
-        <button class="actions-buttons buttonFinalizar">FINALIZAR</button>
-        <button class="actions-buttons buttonSubirGifo">SUBIR GIFO</button>
+      </div>
+
+      <div class="containerPasos">
+        <img class="paso1" src="assets/img/paso-a-paso.svg" alt="Paso 1" />
+        <img class="paso2" src="assets/img/paso-a-paso2.svg" alt="Paso 2" />
+        <img class="paso3" src="assets/img/paso-a-paso3.svg" alt="Paso 3" />
+      </div>
+
+      <hr class="hr-image-subir" />
+
+      <button
+        class="button-ver-mas actions-buttons buttonComenzar white-ver-mas"
+      >
+        COMENZAR
+      </button>
+      <button class="button-ver-mas actions-buttons buttonGrabar white-ver-mas">
+        GRABAR
+      </button>
+      <button
+        class="button-ver-mas actions-buttons buttonFinalizar white-ver-mas"
+      >
+        FINALIZAR
+      </button>
+      <button
+        class="button-ver-mas actions-buttons buttonSubirGifo white-ver-mas"
+      >
+        SUBIR GIFO
+      </button>
     </section>
 
     <footer class="containerFooter">
@@ -231,6 +301,7 @@
       </p>
     </footer>
 
+    <script type="module" src="assets/js/darkMode.js"></script>
     <script type="module" src="api/index.js"></script>
     <script type="module" src="assets/js/main.js"></script>
     <script type="module" src="assets/js/funcionesGenerales.js"></script>

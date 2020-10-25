@@ -2,7 +2,6 @@
 
 import apiGiphy from "../../api/index.js";
 import {
-  renderSpanIconFavorite,
   renderGifo,
   renderRemoveIconFavorite,
   renderListTrendings,
@@ -24,19 +23,14 @@ const containerBuscador = document.querySelector(".sectionBuscador");
 const containerModal = document.getElementById("containerOpenModal");
 const containerNotFoundFavorites = document.getElementById("notFoundFavorites");
 const containerNotFoundMisGifos = document.getElementById("notFoundMisGifos");
-const containerTrendingP = document.querySelector(".containerTrendingP");
 const containerCrearGifo = document.getElementById("containerSubirGifo");
 
 const inputSearch = document.getElementById("inputSearch");
 const imageBuscador = document.querySelector(".imageBuscador");
 const closeModal = document.querySelector(".closeModal");
-const iconCloseModal = closeModal.querySelector("img");
 const titleBuscador = document.querySelector(".titleBuscador");
 const titleMisGifos = document.getElementById("liMisGifosFavoritos");
 const titleGifos = document.getElementById("misGifos");
-const titleMisGifo = document.querySelector(".titleMisGifos");
-const titleModoNocturno = document.getElementById("modoNocturno");
-const titleFavorites = document.querySelector(".trendingGifos");
 const iconClose = document.querySelector(".iconClose");
 const iconSearch = document.querySelector(".iconSearch");
 const seeMoreButton = document.getElementById("verMasGifs");
@@ -46,141 +40,12 @@ const buttonSliderLeft = document.querySelector(".buttonSliderLeft");
 const buttonSliderRight = document.querySelector(".buttonSliderRight");
 const moveSlider = document.querySelector(".avanzarSliderTrending");
 const backSlider = document.querySelector(".retrocederSliderTrending");
-const body = document.body;
-const imgLogo = imageHeader.querySelector("img");
-const imgCrearGifo = document.querySelector(".crearGifos");
-const texts = body.querySelectorAll("h1, h2, h3, p, li a");
-const imgSliderLeft = body.querySelectorAll(".buttonSliderLeft");
-const imgSliderRight = body.querySelectorAll(".buttonSliderRight");
-const buttonsVerMas = body.querySelectorAll(".button-ver-mas");
-const p = body.querySelectorAll(".p-dark-mode");
 const modalGifos = document.getElementById("openModal");
-const navMovil = document.querySelector(".botoneraMovil");
 const buttonNavMovil = document.querySelector(".icons-bars-times");
-const buttonFabars = document.querySelector(".fa-bars");
-const buttonFatimes = document.querySelector(".fa-times");
 
 let dataSearchs = [];
 let resSlider = [];
 let dataAvanzarSlider = [];
-localStorage.setItem("mode-dark", "white");
-
-//click modo nocturno
-titleModoNocturno.addEventListener("click", () => {
-  if (localStorage.getItem("mode-dark") === "black") {
-    localStorage.setItem("mode-dark", "white");
-  } else {
-    localStorage.setItem("mode-dark", "black");
-  }
-  body.classList.toggle("dark-mode");
-  containerGifos.classList.toggle("container-dark-mode");
-  titleMisGifo.classList.toggle("dark-mode");
-  titleFavorites.classList.toggle("dark-mode");
-  const pListTrendings = containerTrendingP.querySelectorAll("p");
-
-  const a = titleModoNocturno.querySelector("a");
-
-  if (a.innerHTML === "Modo Nocturno") {
-    a.innerHTML = "Modo Diurno";
-    imgLogo.src = "assets/img/Logo-modo-noc.svg";
-    imgCrearGifo.src = "assets/img/CTA-crar-gifo-modo-noc.svg";
-    iconSearch.src = "assets/img/icon-search-modo-noct.svg";
-    iconClose.src = "assets/img/close-modo-noct.svg";
-    iconCloseModal.src = "assets/img/close-modo-noct.svg";
-    containerTrendingGifos.classList.add("trending-gifos-dark");
-    containerTrendingGifos.classList.remove("trending-gifos-white");
-    containerGifos.classList.add("trending-gifos-dark");
-    containerGifos.classList.remove("trending-gifos-white");
-    inputSearch.classList.add("input-dark-mode");
-    inputSearch.classList.remove("input-white-mode");
-    containerModal.classList.add("modal-dark-mode");
-    containerModal.classList.remove("modal-white-mode");
-    navMovil.classList.remove("nav-white-mode");
-    if (window.matchMedia("(max-width:767px)").matches) {
-      navMovil.classList.add("trending-gifos-dark");
-    }
-    navMovil.style.opacity = "1";
-
-    imgSliderLeft.forEach((item) => {
-      item.src = "assets/img/button-slider-left-md-noct.svg";
-      item.classList.add("hover-slider-left");
-      item.classList.remove("white-mode-slider-left");
-    });
-    imgSliderRight.forEach((item) => {
-      item.src = "assets/img/button-slider-right-md-noct.svg";
-      item.classList.add("hover-slider-right");
-      item.classList.remove("white-mode-slider-right");
-    });
-
-    buttonsVerMas.forEach((item) => {
-      item.classList.add("dark-ver-mas");
-      item.classList.remove("white-ver-mas");
-    });
-
-    texts.forEach((item) => {
-      item.classList.add("text-dark-mode");
-      item.classList.remove("text-white-mode");
-    });
-    p.forEach((item) => {
-      item.classList.add("text-dark-mode");
-      item.classList.remove("p-dark-mode");
-    });
-
-    pListTrendings.forEach((item) => {
-      item.classList.add("text-dark-mode");
-      item.classList.remove("text-white-mode");
-    });
-  } else {
-    a.innerHTML = "Modo Nocturno";
-    imgLogo.src = "assets/img/logo-desktop.svg";
-    imgCrearGifo.src = "assets/img/button-crear-gifo.svg";
-    iconSearch.src = "assets/img/icon-search.svg";
-    iconClose.src = "assets/img/close.svg";
-    iconCloseModal.src = "assets/img/close.svg";
-    containerTrendingGifos.classList.remove("trending-gifos-dark");
-    containerTrendingGifos.classList.add("trending-gifos-white");
-    containerGifos.classList.remove("trending-gifos-dark");
-    containerGifos.classList.add("trending-gifos-white");
-    inputSearch.classList.remove("input-dark-mode");
-    inputSearch.classList.add("input-white-mode");
-    containerModal.classList.remove("modal-dark-mode");
-    containerModal.classList.add("modal-white-mode");
-    navMovil.classList.add("nav-white-mode");
-    if (window.matchMedia("max-width:767px")) {
-      navMovil.classList.remove("trending-gifos-dark");
-    }
-    // navMovil.style.opacity = "0.9";
-
-    imgSliderLeft.forEach((item) => {
-      item.src = "assets/img/button-slider-left.svg";
-      item.classList.remove("hover-slider-left");
-      item.classList.add("white-mode-slider-left");
-    });
-    imgSliderRight.forEach((item) => {
-      item.src = "assets/img/Button-Slider-right.svg";
-      item.classList.remove("hover-slider-right");
-      item.classList.add("white-mode-slider-right");
-    });
-
-    buttonsVerMas.forEach((item) => {
-      item.classList.remove("dark-ver-mas");
-      item.classList.add("white-ver-mas");
-    });
-    texts.forEach((item) => {
-      item.classList.remove("text-dark-mode");
-      item.classList.add("text-white-mode");
-    });
-    p.forEach((item) => {
-      item.classList.remove("text-dark-mode");
-      item.classList.add("p-dark-mode");
-    });
-
-    pListTrendings.forEach((item) => {
-      item.classList.remove("text-dark-mode");
-      item.classList.add("text-white-mode");
-    });
-  }
-});
 
 //click en button nav movil
 buttonNavMovil.addEventListener("click", () => {});
@@ -223,7 +88,13 @@ seeMoreButton.addEventListener("click", async () => {
   try {
     const results = await apiGiphy.getSeeMoreGifos(keywords, offset, 12);
     const res = await results.json();
-    renderGifo(res.data, containerSearchResultsGifos, "searchSlider");
+    renderGifo(
+      res.data,
+      containerSearchResultsGifos,
+      "searchSlider",
+      "hover-container-gifs",
+      "container-general-gifs"
+    );
     res.data.forEach((item) => dataSearchs.push(item));
 
     localStorage.setItem("listSearch", JSON.stringify(dataSearchs));
@@ -295,8 +166,11 @@ titleMisGifos.addEventListener("click", () => {
   renderGifo(
     apiGiphy.localStorageFavorites.slice(0, 12),
     containerMisGifosFavoritos,
-    "favoritesSlider"
+    "favoritesSlider",
+    "hover-container-gifs",
+    "container-general-gifs"
   );
+
   removeClassLoader();
 });
 
@@ -310,7 +184,9 @@ seeMoreButtonFavorite.addEventListener("click", async () => {
     renderGifo(
       apiGiphy.localStorageFavorites.slice(offsetInicio, offsetFin),
       containerMisGifosFavoritos,
-      "favoritesSlider"
+      "favoritesSlider",
+      "hover-container-gifs",
+      "container-general-gifs"
     );
     removeClassLoader();
   } catch (error) {
@@ -338,7 +214,9 @@ titleGifos.addEventListener("click", () => {
   renderGifo(
     apiGiphy.localStorageMisGifos.slice(0, 12),
     container_MisGifos,
-    "misGifosSlider"
+    "misGifosSlider",
+    "hover-container-gifs",
+    "container-general-gifs"
   );
   removeClassLoader();
 });
@@ -379,10 +257,14 @@ async function avanzarSlider() {
       (item) => item.id === idGifo
     );
   }
+  const indexMisGifos = apiGiphy.localStorageMisGifos.findIndex(
+    (item) => item.id === idGifo
+  );
 
   const indiceFavorites = apiGiphy.localStorageFavorites.length - 1;
   const indiceTrending = apiGiphy.localStorageTrending.length - 1;
   const indiceSearch = apiGiphy.localStorageSearch.length - 1;
+  const indiceMisGifos = apiGiphy.localStorageMisGifos - 1;
 
   buttonSliderLeft.style.visibility = "hidden";
   buttonSliderRight.style.visibility = "hidden";
@@ -398,7 +280,7 @@ async function avanzarSlider() {
           apiGiphy.localStorageFavorites.length - 1
         ]
       );
-      renderGifo(data, containerModal, "favoritesSlider");
+      renderGifo(data, containerModal, "favoritesSlider", "modal-hover", "");
     }
   }
 
@@ -408,7 +290,7 @@ async function avanzarSlider() {
       data.push(
         apiGiphy.localStorageTrending[apiGiphy.localStorageTrending.length - 1]
       );
-      renderGifo(data, containerModal, "trendingSlider");
+      renderGifo(data, containerModal, "trendingSlider", "modal-hover", "");
     }
   }
 
@@ -417,7 +299,17 @@ async function avanzarSlider() {
       let data = [];
       const listSearch = JSON.parse(localStorage.getItem("listSearch"));
       data.push(listSearch[listSearch.length - 1]);
-      renderGifo(data, containerModal, "searchSlider");
+      renderGifo(data, containerModal, "searchSlider", "modal-hover", "");
+    }
+  }
+
+  if (indexMisGifos === indiceMisGifos) {
+    if (classSlider === "misGifosSlider") {
+      let data = [];
+      data.push(
+        apiGiphy.localStorageMisGifos[apiGiphy.localStorageMisGifos.length - 1]
+      );
+      renderGifo(data, containerModal, "misGifosSlider", "modal-hover", "");
     }
   }
 
@@ -429,7 +321,9 @@ async function avanzarSlider() {
           indexFavorites + 2
         ),
         containerModal,
-        "favoritesSlider"
+        "favoritesSlider",
+        "modal-hover",
+        ""
       );
     }
   }
@@ -442,7 +336,9 @@ async function avanzarSlider() {
           indexTrending + 2
         ),
         containerModal,
-        "trendingSlider"
+        "trendingSlider",
+        "modal-hover",
+        ""
       );
     }
   }
@@ -454,7 +350,24 @@ async function avanzarSlider() {
           indexSearch + 2
         ),
         containerModal,
-        "searchSlider"
+        "searchSlider",
+        "modal-hover",
+        ""
+      );
+    }
+  }
+
+  if (indexMisGifos !== indiceMisGifos) {
+    if (classSlider === "misGifosSlider") {
+      renderGifo(
+        apiGiphy.localStorageMisGifos.slice(
+          indexMisGifos + 1,
+          indexMisGifos + 2
+        ),
+        containerModal,
+        "misGifosSlider",
+        "modal-hover",
+        ""
       );
     }
   }
@@ -481,6 +394,10 @@ async function retrocederSlider() {
     (item) => item.id === idGifo
   );
 
+  const indexMisGifos = apiGiphy.localStorageMisGifos.findIndex(
+    (item) => item.id === idGifo
+  );
+
   buttonSliderLeft.style.visibility = "hidden";
   buttonSliderRight.style.visibility = "hidden";
 
@@ -491,7 +408,7 @@ async function retrocederSlider() {
     if (classSlider === "favoritesSlider") {
       let data = [];
       data.push(apiGiphy.localStorageFavorites[0]);
-      renderGifo(data, containerModal, "favoritesSlider");
+      renderGifo(data, containerModal, "favoritesSlider", "modal-hover", "");
     }
   }
 
@@ -499,7 +416,7 @@ async function retrocederSlider() {
     if (classSlider === "trendingSlider") {
       let data = [];
       data.push(apiGiphy.localStorageTrending[0]);
-      renderGifo(data, containerModal, "trendingSlider");
+      renderGifo(data, containerModal, "trendingSlider", "modal-hover", "");
     }
   }
 
@@ -507,7 +424,15 @@ async function retrocederSlider() {
     if (classSlider === "searchSlider") {
       let data = [];
       data.push(JSON.parse(localStorage.getItem("listSearch"))[0]);
-      renderGifo(data, containerModal, "searchSlider");
+      renderGifo(data, containerModal, "searchSlider", "modal-hover", "");
+    }
+  }
+
+  if (indexMisGifos === 0) {
+    if (classSlider === "misGifosSlider") {
+      let data = [];
+      data.push(apiGiphy.localStorageMisGifos[0]);
+      renderGifo(data, containerModal, "misGifosSlider", "modal-hover", "");
     }
   }
 
@@ -519,7 +444,9 @@ async function retrocederSlider() {
           indexFavorites
         ),
         containerModal,
-        "favoritesSlider"
+        "favoritesSlider",
+        "modal-hover",
+        ""
       );
     }
   }
@@ -529,7 +456,9 @@ async function retrocederSlider() {
       renderGifo(
         apiGiphy.localStorageTrending.slice(indexTrending - 1, indexTrending),
         containerModal,
-        "trendingSlider"
+        "trendingSlider",
+        "modal-hover",
+        ""
       );
     }
   }
@@ -542,7 +471,22 @@ async function retrocederSlider() {
           indexSearch
         ),
         containerModal,
-        "searchSlider"
+        "searchSlider",
+        "modal-hover",
+        ""
+      );
+    }
+  }
+
+  
+  if (indexMisGifos !== 0) {
+    if (classSlider === "misGifosSlider") {
+      renderGifo(
+        apiGiphy.localStorageMisGifos.slice(indexMisGifos - 1, indexMisGifos),
+        containerModal,
+        "misGifosSlider",
+        "modal-hover",
+        ""
       );
     }
   }
@@ -614,12 +558,14 @@ moveSlider.addEventListener("click", () => {
   imgs.forEach((item) => item.parentNode.removeChild(item));
 
   if (resSlider[0] === "avanzarSlider") {
-    renderGifo(dataAvanzarSlider, containerGifos, "trendingSlider");
+    renderGifo(dataAvanzarSlider, containerGifos, "trendingSlider", "hover-gif-image", "hover-general-gif");
   } else {
     renderGifo(
       apiGiphy.localStorageTrending.slice(sliceStart, sliceEnd),
       containerGifos,
-      "trendingSlider"
+      "trendingSlider",
+      "hover-gif-image",
+      "hover-general-gif"
     );
   }
   removeClassLoader();
@@ -639,13 +585,15 @@ backSlider.addEventListener("click", () => {
     renderGifo(
       apiGiphy.localStorageTrending.slice(0, 3),
       containerGifos,
-      "trendingSlider"
+      "trendingSlider", "hover-gif-image", "hover-general-gif"
     );
   } else {
     renderGifo(
       apiGiphy.localStorageTrending.slice(sliceStart, sliceEnd),
       containerGifos,
-      "trendingSlider"
+      "trendingSlider",
+      "hover-gif-image",
+      "hover-general-gif"
     );
   }
   removeClassLoader();
@@ -707,7 +655,8 @@ async function getResultsTags(keywords) {
     containerSearchGifos.style.display = "block";
     titleCategorySearch.innerHTML = keywords;
     showTitleImageSearch();
-    renderGifo(res.data, containerSearchResultsGifos, "searchSlider");
+    renderGifo(res.data, containerSearchResultsGifos, "searchSlider",  "hover-container-gifs",
+    "container-general-gifs");
     seeMoreButton.style.display = "block";
     removeClassLoader();
   } catch (error) {
@@ -746,13 +695,17 @@ async function getLastGifs() {
       renderGifo(
         apiGiphy.localStorageTrending.slice(0, 12),
         containerGifos,
-        "trendingSlider"
+        "trendingSlider",
+        "hover-gif-image",
+        "hover-general-gif"
       );
     } else {
       renderGifo(
         apiGiphy.localStorageTrending.slice(0, 3),
         containerGifos,
-        "trendingSlider"
+        "trendingSlider",
+        "hover-gif-image",
+        "hover-general-gif"
       );
     }
     removeClassLoader();
