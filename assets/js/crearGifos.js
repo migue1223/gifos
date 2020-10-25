@@ -77,6 +77,7 @@ async function getStreamAndRecord() {
       paso2.src = "assets/img/paso-a-paso-hover2.svg";
     }
     counter.style.display = "block";
+    counter.innerHTML = "00:00:00";
   }
 }
 
@@ -89,6 +90,7 @@ buttonComenzar.addEventListener("click", async () => {
   } else {
     paso1.src = "assets/img/paso-a-paso-hover.svg";
   }
+  counter.style.display = "none";
   getStreamAndRecord();
 });
 
