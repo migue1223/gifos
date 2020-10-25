@@ -13,7 +13,7 @@ class apiGipgy {
     this.API_URL_SEARCH_ID = "https://api.giphy.com/v1/gifs/";
     this.API_URL_TRENDING_SEARCHES =
       "https://api.giphy.com/v1/trending/searches?";
-      this.API_URL_UPLOAD = "http://upload.giphy.com/v1/gifs?"
+      this.API_URL_UPLOAD = "https://upload.giphy.com/v1/gifs?"
     this.localStorageFavorites =
       JSON.parse(localStorage.getItem("listFavorites")) || [];
     this.localStorageTrending =
