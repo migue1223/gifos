@@ -578,8 +578,8 @@ body {
 .hover-general-gif span {
   display: none;
   position: absolute;
-  margin-top: -20%;
-  margin-left: 17%;
+  margin-top: -19%;
+  margin-left: 16%;
   z-index: 1;
 }
 
@@ -1000,7 +1000,18 @@ body {
   margin-right: 168px;
 }
 
+@media (max-width: 1366px) {
+  .hover-general-gif span {
+    margin-top: -20%;
+    margin-left: 17%;
+  }
+}
+
 @media (max-width: 1280px) {
+  .hover-general-gif span {
+    margin-top: -21%;
+    margin-left: 18%;
+  }
 }
 
 @media (min-width: 1025px) {
@@ -1117,10 +1128,11 @@ body {
   }
   /* nav */
   .botoneraMovil {
+    display: none;
     position: absolute;
     width: 100%;
-    height: 0;
-    top: 95px;
+    height: 100vh;
+    top: 90px;
     opacity: 0.9;
   }
 
@@ -1137,7 +1149,7 @@ body {
   }
 
   .botoneraMovil ul li {
-    display: none;
+    /* display: none; */
     width: 100%;
     height: 60px;
     line-height: 60px;
@@ -1175,22 +1187,23 @@ body {
     display: none;
   }
 
-  .botonMovil:checked + .labelMovil span .fa-times {
+  /* .botonMovil:checked + .labelMovil span .fa-times {
     display: block;
   }
 
   .botonMovil:checked + .labelMovil span .fa-bars {
     display: none;
-  }
+  } */
 
-  .botonMovil:checked ~ .botoneraMovil.botoneraMovil ul li {
+  /* .botonMovil:checked ~ .botoneraMovil.botoneraMovil ul li {
     display: block;
   }
 
   .botonMovil:checked ~ .botoneraMovil.botoneraMovil {
     height: 100vh;
     z-index: 1;
-  }
+  } */
+
   .crearGifos {
     display: none;
   }

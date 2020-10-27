@@ -1,11 +1,9 @@
 "use strict";
 
 import apiGiphy from "../../api/index.js";
-import { downloadIconGifo } from "./funcionesGenerales.js";
 
 const containerCrearGifo = document.getElementById("containerSubirGifo");
 const containers = document.querySelectorAll(".hiddenCrearGifo");
-const containerCamGifo = document.getElementById("containerCrearGifo");
 
 const buttonAddGifos = document.getElementById("crearGifos");
 const buttonComenzar = document.querySelector(".buttonComenzar");
@@ -124,6 +122,8 @@ buttonFinalizar.addEventListener("click", () => {
 
 buttonUpload.addEventListener("click", async () => {
   efectosImg.style.display = "block";
+  efectosImg.removeAttribute("src");
+  efectosImg.removeAttribute("alt");
   loaderSubirGifo.style.display = "block";
   imgSubir.style.display = "block";
   if (localStorage.getItem("mode-dark") === "black") {

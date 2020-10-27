@@ -1,4 +1,4 @@
-import {buttonsActionsModeDark} from './crearGifos.js'
+import { buttonsActionsModeDark } from "./crearGifos.js";
 
 const containerTrendingP = document.querySelector(".containerTrendingP");
 const containerGifos = document.querySelector(".containerImgGifos");
@@ -26,13 +26,13 @@ const iconClose = document.querySelector(".iconClose");
 
 //click modo nocturno
 window.onload = () => {
-  changeDarkMode()
+  changeDarkMode();
   const paso1 = document.querySelector(".paso1");
   const paso2 = document.querySelector(".paso2");
   const paso3 = document.querySelector(".paso3");
   buttonsActionsModeDark(paso1, paso2, paso3);
-}
- 
+};
+
 titleModoNocturno.addEventListener("click", () => {
   if (localStorage.getItem("mode-dark") === "black") {
     localStorage.setItem("mode-dark", "white");
@@ -44,6 +44,31 @@ titleModoNocturno.addEventListener("click", () => {
   const paso2 = document.querySelector(".paso2");
   const paso3 = document.querySelector(".paso3");
   buttonsActionsModeDark(paso1, paso2, paso3);
+  changeNavMovil();
+});
+
+function changeNavMovil() {
+  if (window.matchMedia("(max-width:768px)").matches) {
+    navMovil.style.display = "none";
+    buttonFabars.style.display = "block";
+    buttonFatimes.style.display = "none";
+  }
+}
+
+buttonFabars.addEventListener("click", () => {
+  if (window.matchMedia("(max-width:768px)").matches) {
+    navMovil.style.display = "block";
+    buttonFabars.style.display = "none";
+    buttonFatimes.style.display = "block";
+  }
+});
+
+buttonFatimes.addEventListener("click", () => {
+  if (window.matchMedia("(max-width:768px)").matches) {
+    navMovil.style.display = "none";
+    buttonFatimes.style.display = "none";
+    buttonFabars.style.display = "block";
+  }
 });
 
 function changeDarkMode() {
@@ -70,10 +95,13 @@ function changeDarkMode() {
     containerModal.classList.add("modal-dark-mode");
     containerModal.classList.remove("modal-white-mode");
     navMovil.classList.remove("nav-white-mode");
-    if (window.matchMedia("(max-width:767px)").matches) {
+    if (window.matchMedia("(max-width:768px)").matches) {
       navMovil.classList.add("trending-gifos-dark");
+      buttonFabars.style.color = "white";
+      buttonFatimes.style.color = "white";
+      navMovil.style.opacity = "1";
+      navMovil.style.zIndex = "2";
     }
-    navMovil.style.opacity = "1";
 
     imgSliderLeft.forEach((item) => {
       item.src = "assets/img/button-slider-left-md-noct.svg";
@@ -124,10 +152,13 @@ function changeDarkMode() {
     containerModal.classList.remove("modal-dark-mode");
     containerModal.classList.add("modal-white-mode");
     navMovil.classList.add("nav-white-mode");
-    if (window.matchMedia("max-width:767px")) {
+    if (window.matchMedia("max-width:768px")) {
       navMovil.classList.remove("trending-gifos-dark");
+      buttonFatimes.style.color = "#572ee5";
+      buttonFabars.style.color = "#572ee5";
+      navMovil.style.opacity = "0.9";
+      navMovil.style.zIndex = "1"
     }
-    // navMovil.style.opacity = "0.9";
 
     imgSliderLeft.forEach((item) => {
       item.src = "assets/img/button-slider-left.svg";
@@ -159,3 +190,5 @@ function changeDarkMode() {
     });
   }
 }
+
+export {changeNavMovil}

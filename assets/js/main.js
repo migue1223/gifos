@@ -6,6 +6,7 @@ import {
   renderRemoveIconFavorite,
   renderListTrendings,
 } from "./funcionesGenerales.js";
+import { changeNavMovil } from "./darkMode.js";
 
 const containerGifos = document.querySelector(".containerImgGifos"); //resultados de gifos slide
 const containerTrendingGifos = document.getElementById("trendingGifos");
@@ -41,14 +42,14 @@ const buttonSliderRight = document.querySelector(".buttonSliderRight");
 const moveSlider = document.querySelector(".avanzarSliderTrending");
 const backSlider = document.querySelector(".retrocederSliderTrending");
 const modalGifos = document.getElementById("openModal");
-const buttonNavMovil = document.querySelector(".icons-bars-times");
 const buttonAddGifos = document.getElementById("crearGifos");
+const navMovil = document.querySelector(".botoneraMovil");
+const buttonFabars = document.querySelector(".fa-bars");
+const buttonFatimes = document.querySelector(".fa-times");
 
 let dataSearchs = [];
 let resSlider = [];
 let dataAvanzarSlider = [];
-
-buttonNavMovil.addEventListener("click", () => {});
 
 inputSearch.addEventListener("click", () => {
   const listSearch = [];
@@ -137,6 +138,13 @@ titleMisGifos.addEventListener("click", () => {
   containerCrearGifo.style.display = "none";
   containerMisGifos.style.display = "flex";
   containerGifos.style.display = "flex";
+  changeNavMovil();
+
+  if (localStorage.getItem("mode-dark") === "black") {
+    buttonAddGifos.src = "assets/img/CTA-crar-gifo-modo-noc.svg";
+  } else {
+    buttonAddGifos.src = "assets/img/button-crear-gifo.svg";
+  }
 
   if (apiGiphy.localStorageFavorites.length === 0) {
     containerNotFoundFavorites.style.display = "flex";
@@ -193,6 +201,13 @@ titleGifos.addEventListener("click", () => {
   containerCrearGifo.style.display = "none";
   containerGifos.style.display = "flex";
   containerMisGifos_.style.display = "flex";
+  changeNavMovil();
+
+  if (localStorage.getItem("mode-dark") === "black") {
+    buttonAddGifos.src = "assets/img/CTA-crar-gifo-modo-noc.svg";
+  } else {
+    buttonAddGifos.src = "assets/img/button-crear-gifo.svg";
+  }
 
   if (apiGiphy.localStorageMisGifos.length === 0) {
     containerNotFoundMisGifos.style.display = "flex";
@@ -220,6 +235,7 @@ imageHeader.addEventListener("click", () => {
   containerBuscador.style.display = "flex";
   containerTrendingGifos.style.display = "flex";
   containerGifos.style.display = "flex";
+  changeNavMovil();
 
   if (localStorage.getItem("mode-dark") === "black") {
     buttonAddGifos.src = "assets/img/CTA-crar-gifo-modo-noc.svg";
@@ -394,9 +410,12 @@ async function retrocederSlider() {
   const indexTrending = apiGiphy.localStorageTrending.findIndex(
     (item) => item.id === idGifo
   );
-  const indexSearch = JSON.parse(localStorage.getItem("listSearch")).findIndex(
-    (item) => item.id === idGifo
-  );
+  let indexSearch;
+  if (localStorage.getItem("listSearch") !== null) {
+    indexSearch = JSON.parse(localStorage.getItem("listSearch")).findIndex(
+      (item) => item.id === idGifo
+    );
+  }
 
   const indexMisGifos = apiGiphy.localStorageMisGifos.findIndex(
     (item) => item.id === idGifo
