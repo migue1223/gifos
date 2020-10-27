@@ -1,3 +1,2 @@
 github: https://github.com/migue1223/gifos
-proyecto: https://relaxed-euclid-ea0498.netlify.app/
-recargar con F5 sino cargan al instante los trending
+proyecto: https://vigorous-roentgen-ba667c.netlify.app/
