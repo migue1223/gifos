@@ -25,6 +25,7 @@ const containerModal = document.getElementById("containerOpenModal");
 const containerNotFoundFavorites = document.getElementById("notFoundFavorites");
 const containerNotFoundMisGifos = document.getElementById("notFoundMisGifos");
 const containerCrearGifo = document.getElementById("containerSubirGifo");
+const containerUlSearch = document.querySelector(".container-ul-search");
 
 const inputSearch = document.getElementById("inputSearch");
 const imageBuscador = document.querySelector(".imageBuscador");
@@ -72,6 +73,7 @@ inputSearch.addEventListener("keyup", (e) => {
   } else {
     getSuggestionsSearh(valueInput);
     removeClassLoader();
+    removeUlSearch();
   }
   if (valueInput === "") {
     removeUlSearch();
@@ -243,6 +245,12 @@ imageHeader.addEventListener("click", () => {
     buttonAddGifos.src = "assets/img/button-crear-gifo.svg";
   }
 
+  if (localStorage.getItem("mode-dark") === "black") {
+    inputSearch.classList = "input-dark-mode inputSearch";
+  } else {
+    inputSearch.classList = "input-white-mode inputSearch";
+  }
+
   const imgs = containerGifos.querySelectorAll("figure");
   imgs.forEach((item) => item.parentNode.removeChild(item));
   const imgs2 = containerSearchResultsGifos.querySelectorAll("figure");
@@ -254,6 +262,8 @@ imageHeader.addEventListener("click", () => {
   containerSearchGifos.style.display = "none";
   seeMoreButton.style.display = "none";
 
+  showTitleImageSearch();
+  removeUlSearch();
   getLastGifs();
   listTrendingSearch();
 });
@@ -530,6 +540,14 @@ function hideTitleImageSearch() {
   containerSearchGifos.style.display = "none";
   iconClose.style.display = "block";
   seeMoreButton.style.display = "none";
+  if (localStorage.getItem("mode-dark") === "black") {
+    containerUlSearch.classList = "busqueda-active-dark";
+    inputSearch.classList =
+      "input-dark-mode input-active-dark-mode inputSearch";
+  } else {
+    containerUlSearch.classList = "busqueda-active";
+    inputSearch.classList = "input-active-white-mode inputSearch";
+  }
   const imgs = containerSearchResultsGifos.querySelectorAll("figure");
   if (imgs.length > 0) {
     imgs.forEach((element) => {
@@ -544,6 +562,14 @@ function showTitleImageSearch() {
   iconSearch.style.display = "block";
   iconClose.style.display = "none";
   inputSearch.value = "";
+
+  if (localStorage.getItem("mode-dark") === "black") {
+    containerUlSearch.classList.remove("busqueda-active-dark");
+    inputSearch.classList = "input-dark-mode inputSearch";
+  } else {
+    containerUlSearch.classList.remove("busqueda-active");
+    inputSearch.classList = "input-white-mode inputSearch";
+  }
 }
 
 function showListSuggestions(e) {
@@ -699,9 +725,20 @@ async function getSuggestionsSearh(keywords) {
     ul.className = "ulContentSearch";
     res.data.forEach((item) => {
       const li = document.createElement("li");
+      const i = document.createElement("i");
+      const p = document.createElement("p");
+      if (localStorage.getItem("mode-dark") === "black") {
+        p.classList = "li-p-dark";
+        i.classList = "li-p-dark fas fa-search";
+      } else {
+        p.classList = "li-p-white";
+        i.classList = "li-p-white fas fa-search";
+      }
       const textLi = document.createTextNode(item.name);
-      li.appendChild(textLi);
+      p.appendChild(textLi);
       li.addEventListener("click", showListSuggestions);
+      li.appendChild(i);
+      li.appendChild(p);
       ul.appendChild(li);
       inputSearch.parentNode.appendChild(ul);
     });

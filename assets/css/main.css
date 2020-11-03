@@ -162,6 +162,12 @@ body {
   margin-bottom: 45px;
 }
 
+.busqueda-active {
+  border: 1px solid #572ee5;
+  border-radius: 20px;
+  height: auto;
+}
+
 .imageBuscador {
   width: 399px;
   height: 190px;
@@ -187,9 +193,7 @@ body {
   width: 551px;
   height: 50px;
   border-radius: 27px;
-  border-radius: 27px;
   text-align: center;
-  margin-bottom: 31px;
   outline: none;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
@@ -201,10 +205,27 @@ body {
   color: #000000;
 }
 
+.input-active-white-mode {
+  background: #ffffff;
+  border: none;
+  color: #37383C;
+}
+
+.li-p-white {
+  color: black;
+  opacity: .4;
+}
+
 .sectionBuscador span {
   position: absolute;
   margin-left: -3%;
   margin-top: 1%;
+}
+.iconSearch2 {
+  position: absolute;
+  margin-left: 1%;
+  margin-top: 1%;
+  opacity: .4;
 }
 .containerTrendingP {
   display: flex;
@@ -226,6 +247,7 @@ body {
   font-weight: bold;
   text-align: center;
   line-height: 25px;
+  margin-top: 31px;
 }
 
 .reactions {
@@ -293,8 +315,8 @@ body {
 .container-general-gifs span {
   display: none;
   position: absolute;
-  margin-top: -14.5%;
-  margin-left: 11.5%;
+  margin-top: -13.7%;
+  margin-left: 11%;
   z-index: 1;
 }
 
@@ -469,15 +491,15 @@ body {
 }
 .ulContentSearch {
   z-index: 1;
-  position: absolute;
+  position: relative;
   width: 500px;
-  margin-top: -30px;
   text-align: left;
-  background-color: #fff;
   margin-left: 24px;
-  border-radius: 10px;
+  
 }
 .ulContentSearch li {
+  display: flex;
+  align-items: center;
   line-height: 30px;
   font-family: "Roboto", sans-serif;
   font-size: 15px;
@@ -488,7 +510,13 @@ body {
 }
 .ulContentSearch li:hover {
   cursor: pointer;
-  background-color: #f4f5f9;
+}
+.ulContentSearch li:last-child {
+  margin-bottom: 10px;
+}
+.ulContentSearch li i {
+  opacity: .4;
+  margin-right: 10px;
 }
 
 .notFoundFavorites {
@@ -1004,6 +1032,10 @@ body {
   .hover-general-gif span {
     margin-top: -20%;
     margin-left: 17%;
+  }
+  .container-general-gifs span {
+    margin-top: -14.5%;
+    margin-left: 11.5%;
   }
 }
 
