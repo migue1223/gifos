@@ -45,7 +45,36 @@ titleModoNocturno.addEventListener("click", () => {
   const paso3 = document.querySelector(".paso3");
   buttonsActionsModeDark(paso1, paso2, paso3);
   changeNavMovil();
+  removeUlSearch();
+  showTitleImageSearch();
 });
+
+function removeUlSearch() {
+  const ulContainerSearch = document.querySelectorAll(".ulContentSearch");
+  ulContainerSearch.forEach((item) => (item.style.display = "none"));
+}
+
+function showTitleImageSearch() {
+  const titleBuscador = document.querySelector(".titleBuscador");
+  const imageBuscador = document.querySelector(".imageBuscador");
+  const iconClose = document.querySelector(".iconClose");
+  const iconSearch = document.querySelector(".iconSearch");
+  const inputSearch = document.getElementById("inputSearch");
+  const containerUlSearch = document.querySelector(".container-ul-search");
+  titleBuscador.style.display = "block";
+  imageBuscador.style.display = "block";
+  iconSearch.style.display = "block";
+  iconClose.style.display = "none";
+  inputSearch.value = "";
+
+  if (localStorage.getItem("mode-dark") === "black") {
+    containerUlSearch.classList = "container-ul-search";
+    inputSearch.classList = "input-dark-mode inputSearch";
+  } else {
+    containerUlSearch.classList = "container-ul-search";
+    inputSearch.classList = "input-white-mode inputSearch";
+  }
+}
 
 function changeNavMovil() {
   if (window.matchMedia("(max-width:768px)").matches) {
@@ -157,7 +186,7 @@ function changeDarkMode() {
       buttonFatimes.style.color = "#572ee5";
       buttonFabars.style.color = "#572ee5";
       navMovil.style.opacity = "0.9";
-      navMovil.style.zIndex = "1"
+      navMovil.style.zIndex = "1";
     }
 
     imgSliderLeft.forEach((item) => {
@@ -191,4 +220,4 @@ function changeDarkMode() {
   }
 }
 
-export {changeNavMovil}
+export { changeNavMovil };

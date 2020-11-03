@@ -541,11 +541,11 @@ function hideTitleImageSearch() {
   iconClose.style.display = "block";
   seeMoreButton.style.display = "none";
   if (localStorage.getItem("mode-dark") === "black") {
-    containerUlSearch.classList = "busqueda-active-dark";
+    containerUlSearch.classList = "container-ul-search busqueda-active-dark";
     inputSearch.classList =
       "input-dark-mode input-active-dark-mode inputSearch";
   } else {
-    containerUlSearch.classList = "busqueda-active";
+    containerUlSearch.classList = "container-ul-search busqueda-active";
     inputSearch.classList = "input-active-white-mode inputSearch";
   }
   const imgs = containerSearchResultsGifos.querySelectorAll("figure");
@@ -564,10 +564,10 @@ function showTitleImageSearch() {
   inputSearch.value = "";
 
   if (localStorage.getItem("mode-dark") === "black") {
-    containerUlSearch.classList.remove("busqueda-active-dark");
+    containerUlSearch.classList = "container-ul-search";
     inputSearch.classList = "input-dark-mode inputSearch";
   } else {
-    containerUlSearch.classList.remove("busqueda-active");
+    containerUlSearch.classList = "container-ul-search";
     inputSearch.classList = "input-white-mode inputSearch";
   }
 }
